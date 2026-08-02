@@ -336,25 +336,25 @@
                     </div>
 
                     <!-- Countdown Timer Glass Card -->
-                    <div class="reveal glass rounded-3xl p-8 lg:p-10 shadow-xl border border-white/40 dark:border-gray-700/50 relative">
+                    <div class="reveal glass rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl border border-white/40 dark:border-gray-700/50 relative">
                         <div class="absolute -top-6 -right-6 w-24 h-24 bg-accent rounded-full blur-2xl opacity-50 z-0"></div>
-                        <h3 class="font-heading text-2xl font-bold mb-6 text-center z-10 relative dark:text-white">Conference Starts In</h3>
-                        <div class="grid grid-cols-4 gap-4 z-10 relative">
+                        <h3 class="font-heading text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center z-10 relative dark:text-white">Conference Starts In</h3>
+                        <div class="grid grid-cols-4 gap-2 sm:gap-4 z-10 relative">
                             <div class="text-center">
-                                <div id="cd-days" class="text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
-                                <div class="text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-2 font-semibold">Days</div>
+                                <div id="cd-days" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
+                                <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Days</div>
                             </div>
                             <div class="text-center">
-                                <div id="cd-hours" class="text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
-                                <div class="text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-2 font-semibold">Hours</div>
+                                <div id="cd-hours" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
+                                <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Hours</div>
                             </div>
                             <div class="text-center">
-                                <div id="cd-minutes" class="text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
-                                <div class="text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-2 font-semibold">Mins</div>
+                                <div id="cd-minutes" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
+                                <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Mins</div>
                             </div>
                             <div class="text-center">
-                                <div id="cd-seconds" class="text-4xl lg:text-5xl font-bold text-accent font-heading">00</div>
-                                <div class="text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-2 font-semibold">Secs</div>
+                                <div id="cd-seconds" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-accent font-heading">00</div>
+                                <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Secs</div>
                             </div>
                         </div>
                     </div>
@@ -414,21 +414,12 @@
                     <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         <!-- Student Card -->
                         <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8 border border-gray-100 dark:border-slate-700 reveal relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-bl-lg">UG/PG</div>
                             <h3 class="text-xl font-heading font-bold mb-2 dark:text-white">Students</h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">For undergraduate and postgraduate students.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Early Bird</span>
-                                    <span class="font-bold text-gray-900 dark:text-white">₹1,000</span>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
                                     <span class="text-gray-600 dark:text-gray-300 text-sm">Regular</span>
                                     <span class="font-bold text-gray-900 dark:text-white">₹1,500</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">On-Spot</span>
-                                    <span class="font-bold text-gray-900 dark:text-white">₹2,000</span>
                                 </div>
                             </div>
                             <button onclick="navigateTo('register')" class="w-full py-3 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-colors font-bold">Register as Student</button>
@@ -441,16 +432,8 @@
                             <p class="text-sm text-blue-200 mb-6">For physiotherapists, clinicians, and researchers.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-blue-700 pb-2">
-                                    <span class="text-blue-100 text-sm">Early Bird</span>
-                                    <span class="font-bold text-white">₹2,000</span>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-blue-700 pb-2">
                                     <span class="text-blue-100 text-sm">Regular</span>
                                     <span class="font-bold text-white">₹2,500</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-blue-100 text-sm">On-Spot</span>
-                                    <span class="font-bold text-white">₹3,000</span>
                                 </div>
                             </div>
                             <button onclick="navigateTo('register')" class="w-full py-3 rounded-full bg-accent hover:bg-orange-500 text-white transition-colors font-bold shadow-md">Register as Professional</button>
@@ -459,19 +442,15 @@
                         <!-- Group Card -->
                         <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8 border border-gray-100 dark:border-slate-700 reveal relative overflow-hidden">
                             <h3 class="text-xl font-heading font-bold mb-2 dark:text-white">Group Registration</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">For groups of 3 or more participants.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Register a large team directly.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Early Bird (Per Pax)</span>
-                                    <span class="font-bold text-gray-900 dark:text-white">₹1,800</span>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Regular (Per Pax)</span>
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Team of 25 (Total)</span>
                                     <span class="font-bold text-gray-900 dark:text-white">₹2,200</span>
                                 </div>
-                                <div class="flex justify-between items-center text-gray-400">
-                                    <span class="text-sm">On-Spot</span>
-                                    <span class="font-bold">N/A</span>
+                                <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Team of 50 (Total)</span>
+                                    <span class="font-bold text-gray-900 dark:text-white">₹2,000</span>
                                 </div>
                             </div>
                             <button onclick="navigateTo('register')" class="w-full py-3 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-colors font-bold">Register as Group</button>
@@ -515,7 +494,7 @@
                             <div class="form-step" id="step-1">
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div class="md:col-span-2">
-                                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Full Name *</label>
+                                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Full Name (Primary Registrant) *</label>
                                         <input type="text" id="reg-name" required class="input-field" placeholder="Enter your full name as required on certificate">
                                     </div>
                                     <div>
@@ -598,7 +577,7 @@
                             <!-- Step 4: Documents Upload -->
                             <div class="form-step hidden" id="step-4">
                                 <div class="mb-6">
-                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Upload ID Card (Official) *</label>
+                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Upload ID Card (Primary Registrant) *</label>
                                     <p class="text-xs text-gray-500 mb-4">College ID, Employee ID, or Aadhar. Allowed: JPG, PNG, PDF. Max: 10MB.</p>
                                     
                                     <div class="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-8 text-center bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors relative cursor-pointer" onclick="document.getElementById('reg-id-upload').click()">
@@ -616,12 +595,18 @@
                                     <!-- Selection & Summary -->
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Registration Category *</label>
-                                        <select id="reg-category" required class="input-field mb-6" onchange="calculateFee()">
+                                        <select id="reg-category" required class="input-field mb-6" onchange="handleCategoryChange()">
                                             <option value="">Select Category</option>
-                                            <option value="Professional">Professional</option>
-                                            <option value="Student">Student</option>
-                                            <option value="Group">Group Registration (Min 3)</option>
+                                            <option value="Solo - Student">Solo - Student</option>
+                                            <option value="Solo - Professional">Solo - Professional</option>
+                                            <option value="Team of 25">Group - Team of 25</option>
+                                            <option value="Team of 50">Group - Team of 50</option>
                                         </select>
+
+                                        <!-- Dynamic Team Members Container -->
+                                        <div id="team-members-container" class="hidden mb-6 space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                                            <!-- Injected via JavaScript -->
+                                        </div>
 
                                         <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700">
                                             <h4 class="font-heading font-bold text-gray-800 dark:text-white mb-4 border-b border-gray-200 dark:border-slate-600 pb-2">Registration Summary</h4>
@@ -720,18 +705,14 @@
         </section>
 
         <section id="view-admin" class="app-view hidden">
+            <!-- (Admin Dashboard UI remains identical) -->
             <div class="flex h-screen bg-gray-50 dark:bg-dark-bg -mt-24 pt-24 fixed w-full z-40 top-0 left-0">
-                
-                <!-- Sidebar -->
                 <div class="w-64 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 hidden md:flex flex-col">
                     <div class="p-6">
                         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Admin Dashboard</div>
                         <nav class="space-y-2">
                             <a href="#" class="flex items-center gap-3 px-4 py-2.5 bg-primary/10 text-primary dark:text-blue-400 rounded-lg font-medium">
                                 <i class="fas fa-th-large"></i> Overview
-                            </a>
-                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg font-medium transition-colors">
-                                <i class="fas fa-users"></i> Registrations
                             </a>
                             <a href="#" onclick="showEmailTemplates()" class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg font-medium transition-colors">
                                 <i class="fas fa-envelope"></i> Email Templates
@@ -743,7 +724,6 @@
                     </div>
                 </div>
 
-                <!-- Main Content -->
                 <div class="flex-1 overflow-auto p-6 lg:p-10">
                     <div class="flex justify-between items-center mb-8">
                         <div>
@@ -755,7 +735,6 @@
                         </button>
                     </div>
 
-                    <!-- Stats Cards -->
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
                             <div class="text-gray-500 text-sm font-medium mb-1">Total Registrations</div>
@@ -775,7 +754,6 @@
                         </div>
                     </div>
 
-                    <!-- Data Table -->
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                         <div class="p-6 border-b border-gray-100 dark:border-slate-700 flex justify-between items-center">
                             <h3 class="font-bold text-gray-900 dark:text-white">Recent Submissions</h3>
@@ -796,7 +774,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="admin-table-body" class="text-sm divide-y divide-gray-100 dark:divide-slate-700">
-                                    <!-- Populated by JS -->
                                     <tr><td colspan="6" class="p-8 text-center text-gray-500">No registrations found.</td></tr>
                                 </tbody>
                             </table>
@@ -828,7 +805,6 @@
                     </div>
                     
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Approved Email -->
                         <div class="border border-gray-200 dark:border-slate-600 rounded-xl overflow-hidden">
                             <div class="bg-gray-100 dark:bg-slate-900 p-3 text-sm font-medium border-b border-gray-200 dark:border-slate-600">Subject: Registration Confirmed - MALCON 2026</div>
                             <div class="p-6 bg-white text-gray-800 text-sm">
@@ -847,7 +823,6 @@
                             </div>
                         </div>
 
-                        <!-- Pending / Rejected Email logic visual... -->
                         <div class="border border-gray-200 dark:border-slate-600 rounded-xl overflow-hidden">
                             <div class="bg-gray-100 dark:bg-slate-900 p-3 text-sm font-medium border-b border-gray-200 dark:border-slate-600">Subject: Action Required - MALCON 2026</div>
                             <div class="p-6 bg-white text-gray-800 text-sm">
@@ -873,14 +848,12 @@
                 <h2 class="text-2xl font-heading font-bold text-gray-900 dark:text-white mb-2">Check-in Kiosk</h2>
                 <p class="text-gray-500 text-sm mb-8">Scan QR code for entry and food tracking.</p>
 
-                <!-- Mock Scanner UI -->
                 <div class="relative bg-black rounded-2xl aspect-square mb-8 overflow-hidden border-4 border-gray-800 shadow-2xl flex items-center justify-center">
                     <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
                     
                     <!-- Scanner Animation -->
                     <div class="absolute w-full h-1 bg-accent shadow-[0_0_15px_#F28C28] animate-[scan_2s_ease-in-out_infinite]"></div>
                     
-                    <!-- Scanner frame -->
                     <div class="absolute w-3/4 h-3/4 border-2 border-primary/50 border-dashed rounded-lg">
                         <div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary rounded-tl"></div>
                         <div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary rounded-tr"></div>
@@ -890,7 +863,6 @@
 
                     <div class="relative z-10 text-white text-sm">
                         <p class="mb-4 text-gray-400">Scanner Active</p>
-                        <!-- Simulation buttons since we don't have real camera access -->
                         <div class="flex flex-col gap-2">
                             <button onclick="simulateScan('valid')" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded text-xs backdrop-blur">Simulate Valid QR</button>
                             <button onclick="simulateScan('invalid')" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded text-xs backdrop-blur text-red-300">Simulate Invalid QR</button>
@@ -932,6 +904,11 @@
             </div>
             <style>
                 @keyframes scan { 0%, 100% { top: 10%; } 50% { top: 90%; } }
+                
+                /* Specific utility for our team member panel to not hide content ungracefully */
+                .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+                .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 20px; }
             </style>
         </section>
 
@@ -943,7 +920,7 @@
                 <div class="md:col-span-2">
                     <h2 class="text-2xl font-heading font-bold text-primary dark:text-white mb-4">MALCON 2026</h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-md mb-6">
-                        Festora is a professional conference registration and event management platform developed by 221B Labs. It streamlines conference registrations, payment verification workflows, participant management, QR-based check-ins, food tracking, and automated communication for academic conferences, seminars, workshops, and research events.
+                        Festora is a professional conference registration and event management platform developed by 221B Labs. It streamlines conference registrations, payment verification workflows, participant management, QR-based check-ins, food tracking, and automated communication.
                     </p>
                     <div class="flex gap-4">
                         <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition"><i class="fab fa-twitter"></i></a>
@@ -959,8 +936,6 @@
                         <li><a href="#about" class="hover:text-primary transition">About</a></li>
                         <li><a href="#" onclick="navigateTo('register')" class="hover:text-primary transition">Registration</a></li>
                         <li><a href="#" class="hover:text-primary transition">Contact</a></li>
-                        <li><a href="#" class="hover:text-primary transition">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-primary transition">Terms & Conditions</a></li>
                         <li><a href="#" class="hover:text-primary transition">Support</a></li>
                     </ul>
                 </div>
@@ -972,10 +947,6 @@
                         <p class="text-xs text-gray-500 mb-3">A Conference Registration Platform</p>
                         <p class="text-[10px] text-gray-400 uppercase font-semibold mb-1">Developed & Managed by</p>
                         <p class="font-bold text-sm dark:text-gray-300">221B Labs</p>
-                        <div class="mt-3 text-xs space-y-1">
-                            <a href="https://221blabs.com" class="text-blue-500 hover:underline block"><i class="fas fa-globe mr-1"></i> https://221blabs.com</a>
-                            <a href="mailto:contact@221blabs.com" class="text-blue-500 hover:underline block"><i class="fas fa-envelope mr-1"></i> contact@221blabs.com</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -992,7 +963,6 @@
 
     <script>
         // --- CONSTANTS & STATE ---
-        // UPDATE THIS to your Make.com Webhook URL (e.g., https://hook.us1.make.com/...)
         const WEBHOOK_URL = 'https://example.com/api/webhook'; 
         
         let state = {
@@ -1004,36 +974,28 @@
             checkinData: null
         };
 
-        // Pricing Structure
+        // Updated Pricing Structure 
+        // 25 people total = 2200, 50 people total = 2000
         const pricing = {
-            Professional: { early: 2000, regular: 2500, onspot: 3000 },
-            Student: { early: 1000, regular: 1500, onspot: 2000 },
-            Group: { early: 1800, regular: 2200, onspot: 2200 }
+            'Solo - Professional': 2500,
+            'Solo - Student': 1500,
+            'Team of 25': 2200,
+            'Team of 50': 2000
         };
 
         // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Check system preference for dark mode
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                toggleDarkMode(true);
-            }
-            
-            // Load from LocalStorage if available
             const savedRegs = localStorage.getItem('festora_regs');
             if(savedRegs) {
                 state.registrations = JSON.parse(savedRegs);
             }
-
-            // Init Countdown
             initCountdown();
 
-            // Hide loader
             setTimeout(() => {
                 const loader = document.getElementById('global-loader');
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 500);
                 
-                // Trigger reveal animations
                 const reveals = document.querySelectorAll('.reveal');
                 reveals.forEach(el => el.classList.add('active'));
             }, 800);
@@ -1052,10 +1014,7 @@
             toast.innerHTML = `${icon} <span>${message}</span>`;
             container.appendChild(toast);
             
-            // Trigger animation
             setTimeout(() => toast.classList.add('show'), 10);
-            
-            // Remove
             setTimeout(() => {
                 toast.classList.remove('show');
                 setTimeout(() => toast.remove(), 300);
@@ -1081,13 +1040,11 @@
 
         // --- NAVIGATION & ROUTING ---
         function navigateTo(viewId) {
-            // Hide all views
             document.querySelectorAll('.app-view').forEach(v => {
                 v.classList.remove('active');
                 setTimeout(() => { if(!v.classList.contains('active')) v.style.display = 'none'; }, 400);
             });
 
-            // Handle Navbar/Footer visibility
             const nav = document.getElementById('main-nav');
             const foot = document.getElementById('main-footer');
             
@@ -1099,17 +1056,13 @@
                 foot.style.display = 'block';
             }
 
-            // Show selected view
             const view = document.getElementById(`view-${viewId}`);
             if(view) {
                 view.style.display = 'block';
-                // Trigger reflow
                 void view.offsetWidth; 
                 view.classList.add('active');
                 state.currentView = viewId;
-                
                 window.scrollTo(0, 0);
-
                 if(viewId === 'admin') refreshAdminDashboard();
             }
         }
@@ -1134,19 +1087,15 @@
 
         // --- LANDING PAGE LOGIC ---
         function initCountdown() {
-            // Target: August 21, 2026 08:00 AM
             const countDownDate = new Date("Aug 21, 2026 08:00:00").getTime();
-
             const x = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = countDownDate - now;
-
                 if (distance < 0) {
                     clearInterval(x);
                     document.getElementById("cd-days").innerHTML = "00";
                     return;
                 }
-
                 document.getElementById("cd-days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
                 document.getElementById("cd-hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
                 document.getElementById("cd-minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
@@ -1156,16 +1105,12 @@
 
         // --- REGISTRATION FORM LOGIC ---
         function updateStepUI() {
-            // Hide all steps
             document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
-            // Show current
             document.getElementById(`step-${state.formStep}`).classList.remove('hidden');
 
-            // Update Progress Bar
             const progress = ((state.formStep - 1) / (state.totalSteps - 1)) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
 
-            // Update Markers
             const titles = ['Personal Details', 'Professional Info', 'Food Preference', 'Upload Documents', 'Payment & Submit'];
             document.getElementById('step-title').innerText = titles[state.formStep - 1];
 
@@ -1185,7 +1130,6 @@
                 }
             }
 
-            // Buttons
             document.getElementById('btn-prev').classList.toggle('hidden', state.formStep === 1);
             if (state.formStep === state.totalSteps) {
                 document.getElementById('btn-next').classList.add('hidden');
@@ -1201,7 +1145,6 @@
             const inputs = currentDiv.querySelectorAll('input[required], select[required]');
             let isValid = true;
             
-            // Radio specific check
             if (state.formStep === 3) {
                 const radios = document.querySelectorAll('input[name="food"]:checked');
                 if (radios.length === 0) {
@@ -1217,8 +1160,6 @@
                     input.classList.add('border-red-500');
                 } else {
                     input.classList.remove('border-red-500');
-                    
-                    // Basic validation
                     if (input.type === 'email' && !input.value.includes('@')) isValid = false;
                     if (input.type === 'tel' && input.value.length < 10) isValid = false;
                 }
@@ -1246,7 +1187,6 @@
         function handleFileUpload(input, previewId) {
             const file = input.files[0];
             if (file) {
-                // Size validation (10MB)
                 if (file.size > 10 * 1024 * 1024) {
                     showToast("File is too large. Max 10MB.", "error");
                     input.value = '';
@@ -1258,33 +1198,119 @@
             }
         }
 
+        function createMemberFormHTML(index) {
+            return `
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-gray-200 dark:border-slate-700 mb-4 shadow-sm">
+                <h5 class="font-bold text-primary dark:text-blue-400 mb-4 border-b border-gray-100 dark:border-slate-700 pb-2">Team Member ${index}</h5>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Full Name *</label>
+                        <input type="text" id="member-${index}-name" required class="input-field text-sm py-2 px-3 placeholder-gray-400" placeholder="Full legal name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Email Address *</label>
+                        <input type="email" id="member-${index}-email" required class="input-field text-sm py-2 px-3 placeholder-gray-400" placeholder="email@address.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Phone Number *</label>
+                        <input type="tel" id="member-${index}-phone" pattern="[0-9]{10}" required class="input-field text-sm py-2 px-3 placeholder-gray-400" placeholder="10-digit mobile">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Age *</label>
+                            <input type="number" id="member-${index}-age" min="16" max="99" required class="input-field text-sm py-2 px-3 placeholder-gray-400" placeholder="Age">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Gender *</label>
+                            <select id="member-${index}-gender" required class="input-field text-sm py-2 px-3">
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Designation *</label>
+                        <select id="member-${index}-designation" required class="input-field text-sm py-2 px-3">
+                            <option value="">Select Designation</option>
+                            <option value="Faculty">Faculty</option>
+                            <option value="Academician">Academician</option>
+                            <option value="Research Scholar">Research Scholar</option>
+                            <option value="PhD Scholar">PhD Scholar</option>
+                            <option value="UG Student">UG Student</option>
+                            <option value="PG Student">PG Student</option>
+                            <option value="Professional">Professional</option>
+                            <option value="Industry Expert">Industry Expert</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Institution *</label>
+                        <input type="text" id="member-${index}-institution" required class="input-field text-sm py-2 px-3 placeholder-gray-400" placeholder="Organization name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Food Preference *</label>
+                        <select id="member-${index}-food" required class="input-field text-sm py-2 px-3">
+                            <option value="">Select Food</option>
+                            <option value="Veg">Vegetarian</option>
+                            <option value="Non Veg">Non-Vegetarian</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Upload ID Card * (Max 10MB)</label>
+                        <input type="file" id="member-${index}-id" accept=".jpg,.jpeg,.png,.pdf" required class="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function handleCategoryChange() {
+            const cat = document.getElementById('reg-category').value;
+            const container = document.getElementById('team-members-container');
+            container.innerHTML = '';
+
+            let memberCount = 0;
+            // Subtract 1 because the primary registrant is handled in step 1 & 2
+            if (cat === 'Team of 25') memberCount = 24;
+            if (cat === 'Team of 50') memberCount = 49;
+
+            if (memberCount > 0) {
+                let html = `
+                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-4">
+                        <h4 class="font-heading font-bold text-primary dark:text-blue-300 mb-1">Additional Team Members (${memberCount})</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Please provide details for the remaining ${memberCount} members of your group below.</p>
+                    </div>
+                `;
+                for (let i = 1; i <= memberCount; i++) {
+                    // +1 because index 1 is technically the primary registrant filling out Step 1
+                    html += createMemberFormHTML(i + 1);
+                }
+                container.innerHTML = html;
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+            
+            calculateFee();
+        }
+
         function calculateFee() {
             const cat = document.getElementById('reg-category').value;
+            
             if(!cat) {
                 document.getElementById('summary-base').innerText = '₹0';
                 document.getElementById('summary-total').innerText = '₹0';
                 return;
             }
 
-            // Determine Phase based on current date (Mock logic)
-            // Realistically, would compare Date.now() with cutoff dates.
-            // For demo, we assume "Regular" phase.
-            const phase = 'regular'; 
-            document.getElementById('summary-phase').innerText = 'Regular Phase';
-
-            const fee = pricing[cat][phase];
-            document.getElementById('summary-base').innerText = `₹${fee}`;
+            const phase = 'Regular Phase'; 
+            document.getElementById('summary-phase').innerText = phase;
+            const fee = pricing[cat];
             
-            // Multiple for Group
-            if (cat === 'Group') {
-                document.getElementById('summary-base').innerText = `₹${fee} x 3 (Min)`;
-                document.getElementById('summary-total').innerText = `₹${fee * 3}`;
-            } else {
-                document.getElementById('summary-total').innerText = `₹${fee}`;
-            }
+            document.getElementById('summary-base').innerText = `₹${fee.toLocaleString()}`;
+            document.getElementById('summary-total').innerText = `₹${fee.toLocaleString()}`;
         }
 
-        // Helper to convert File to Base64 for Webhook transmission
         const fileToBase64 = file => new Promise((resolve, reject) => {
             if(!file) return resolve(null);
             const reader = new FileReader();
@@ -1292,7 +1318,6 @@
             reader.onload = () => resolve({
                 filename: file.name,
                 mimeType: file.type,
-                // Split removes the "data:image/jpeg;base64," prefix, keeping only the raw data
                 data: reader.result.split(',')[1] 
             });
             reader.onerror = error => reject(error);
@@ -1301,21 +1326,41 @@
         async function submitRegistration() {
             if (!validateStep()) return;
 
-            // Loading state
             const btn = document.getElementById('btn-submit');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
             btn.disabled = true;
 
             try {
-                // Read uploaded files
                 const idFileInput = document.getElementById('reg-id-upload');
                 const payFileInput = document.getElementById('reg-payment-upload');
-                
                 const idCardFile = await fileToBase64(idFileInput.files[0]);
                 const paymentScreenshotFile = await fileToBase64(payFileInput.files[0]);
 
-                // Gather Data
+                const cat = document.getElementById('reg-category').value;
+                let teamMembers = [];
+                
+                // Collect dynamic team members if group is selected
+                if (cat === 'Team of 25' || cat === 'Team of 50') {
+                    const count = cat === 'Team of 25' ? 24 : 49;
+                    for (let i = 1; i <= count; i++) {
+                        const fileInput = document.getElementById(`member-${i+1}-id`);
+                        teamMembers.push({
+                            name: document.getElementById(`member-${i+1}-name`).value,
+                            email: document.getElementById(`member-${i+1}-email`).value,
+                            phone: document.getElementById(`member-${i+1}-phone`).value,
+                            age: document.getElementById(`member-${i+1}-age`).value,
+                            gender: document.getElementById(`member-${i+1}-gender`).value,
+                            designation: document.getElementById(`member-${i+1}-designation`).value,
+                            institution: document.getElementById(`member-${i+1}-institution`).value,
+                            food: document.getElementById(`member-${i+1}-food`).value,
+                            idCardFilename: fileInput.files[0]?.name || 'not-provided.pdf'
+                            // Note: Processing all 50 actual files into Base64 simultaneously here might 
+                            // lock the browser on slow connections, keeping it to filenames for mock demonstration
+                        });
+                    }
+                }
+
                 const formData = {
                     id: generateID(),
                     timestamp: new Date().toISOString(),
@@ -1329,18 +1374,17 @@
                     institution: document.getElementById('reg-institution').value,
                     affiliation: document.getElementById('reg-affiliation').value,
                     food: document.querySelector('input[name="food"]:checked').value,
-                    category: document.getElementById('reg-category').value,
+                    category: cat,
                     amount: document.getElementById('summary-total').innerText,
                     idProofMock: idFileInput.files[0]?.name || 'document.pdf',
                     paymentMock: payFileInput.files[0]?.name || 'screenshot.jpg',
+                    teamMembers: teamMembers,
                     entryDone: false,
                     foodDone: false,
-                    // Actual file data being sent to Make.com
                     idCard: idCardFile,
                     paymentScreenshot: paymentScreenshotFile
                 };
 
-                // Real Webhook Call (Make.com)
                 if (WEBHOOK_URL && WEBHOOK_URL.includes('make.com')) {
                     await fetch(WEBHOOK_URL, { 
                         method: 'POST', 
@@ -1350,19 +1394,17 @@
                     console.log("Sent payload to Make.com successfully.");
                 } else {
                     console.log("Mock Webhook payload dispatched:", formData);
-                    await new Promise(r => setTimeout(r, 1500)); // Simulate network delay
+                    await new Promise(r => setTimeout(r, 1500)); 
                 }
                 
-                // Save locally to show in Admin Panel
                 state.registrations.unshift(formData);
                 localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
                 
-                // Reset form & Navigate
                 document.getElementById('registration-form').reset();
+                document.getElementById('team-members-container').innerHTML = ''; // reset members
                 state.formStep = 1;
                 updateStepUI();
                 
-                // Clear file previews
                 document.getElementById('id-preview').classList.add('hidden');
                 document.getElementById('payment-preview').classList.add('hidden');
                 
@@ -1380,7 +1422,6 @@
         function refreshAdminDashboard() {
             const regs = state.registrations;
             
-            // Stats
             const total = regs.length;
             const pending = regs.filter(r => r.status === 'Pending').length;
             const approved = regs.filter(r => r.status === 'Approved').length;
@@ -1399,7 +1440,6 @@
             document.getElementById('stat-veg').innerText = `${veg} Veg`;
             document.getElementById('stat-nonveg').innerText = `${nonVeg} Non-Veg`;
 
-            // Table
             const tbody = document.getElementById('admin-table-body');
             tbody.innerHTML = '';
 
@@ -1458,9 +1498,6 @@
                 localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
                 showToast(`Registration ${id} Approved. Email sent.`, "success");
                 refreshAdminDashboard();
-                
-                // Webhook trigger simulation
-                console.log(`Webhook Trigger: Reg ${id} Approved`);
             }
         }
 
@@ -1494,8 +1531,8 @@
 
         function seedMockData() {
             const mocks = [
-                { id: generateID(), timestamp: new Date(Date.now() - 86400000).toISOString(), status: 'Pending', name: 'Dr. John Doe', email: 'john@example.com', phone: '9876543210', institution: 'Malla Reddy Univ', category: 'Professional', amount: '₹2500', food: 'Veg', entryDone: false, foodDone: false },
-                { id: generateID(), timestamp: new Date(Date.now() - 186400000).toISOString(), status: 'Approved', name: 'Jane Smith', email: 'jane@example.com', phone: '9123456780', institution: 'Osmania Univ', category: 'Student', amount: '₹1500', food: 'Non Veg', entryDone: false, foodDone: false }
+                { id: generateID(), timestamp: new Date(Date.now() - 86400000).toISOString(), status: 'Pending', name: 'Dr. John Doe', email: 'john@example.com', phone: '9876543210', institution: 'Malla Reddy Univ', category: 'Solo - Professional', amount: '₹2500', food: 'Veg', entryDone: false, foodDone: false },
+                { id: generateID(), timestamp: new Date(Date.now() - 186400000).toISOString(), status: 'Approved', name: 'Jane Smith', email: 'jane@example.com', phone: '9123456780', institution: 'Osmania Univ', category: 'Solo - Student', amount: '₹1500', food: 'Non Veg', entryDone: false, foodDone: false }
             ];
             state.registrations = [...mocks, ...state.registrations];
             localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
@@ -1511,20 +1548,16 @@
         // --- CHECK-IN LOGIC ---
         function simulateScan(type) {
             const resultCard = document.getElementById('scan-result');
-            
-            // Hide previous results
             resultCard.classList.add('hidden');
             
-            // Fake loading
             setTimeout(() => {
                 if (type === 'valid') {
-                    // Try to get a valid approved registration, else mock
                     let user = state.registrations.find(r => r.status === 'Approved');
                     if(!user) {
                         user = { id: 'MAL-99887', name: 'Dr. Sarah Connor', category: 'Professional', food: 'Veg', status: 'Approved', entryDone: false, foodDone: false };
                     }
                     
-                    state.checkinData = user; // Set current
+                    state.checkinData = user; 
 
                     document.getElementById('scan-initial').innerText = user.name.charAt(0);
                     document.getElementById('scan-name').innerText = user.name;
@@ -1535,7 +1568,6 @@
                     document.getElementById('scan-status').innerText = 'VALID PASS';
                     document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded';
 
-                    // Button states
                     const btnEntry = document.getElementById('btn-mark-entry');
                     const btnFood = document.getElementById('btn-mark-food');
                     
@@ -1584,7 +1616,6 @@
 
         function markAction(action) {
             if(!state.checkinData) return;
-            
             const user = state.checkinData;
             
             if(action === 'entry' && !user.entryDone) {
@@ -1604,7 +1635,6 @@
                 showToast("Food Marked as Collected", "success");
             }
 
-            // Update in local storage
             const index = state.registrations.findIndex(r => r.id === user.id);
             if(index > -1) {
                 state.registrations[index] = user;
