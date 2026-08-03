@@ -46,7 +46,6 @@
     </script>
 
     <style>
-        /* Custom CSS for features beyond standard Tailwind utilities */
         :root {
             --primary: #0B3C6D;
             --secondary: #1D6FA5;
@@ -69,7 +68,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Smooth reveal animations */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -81,7 +79,6 @@
             transform: translateY(0);
         }
 
-        /* Glassmorphism */
         .glass {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
@@ -94,144 +91,55 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F7F9FC;
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: #0F172A;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1D6FA5;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0B3C6D;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F7F9FC; }
+        .dark ::-webkit-scrollbar-track { background: #0F172A; }
+        ::-webkit-scrollbar-thumb { background: #1D6FA5; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0B3C6D; }
 
-        /* Form Steps Indicator */
-        .step-indicator {
-            transition: all 0.3s ease;
-        }
-        .step-active {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        .step-completed {
-            background-color: var(--secondary);
-            color: white;
-            border-color: var(--secondary);
-        }
+        .step-indicator { transition: all 0.3s ease; }
+        .step-active { background-color: var(--primary); color: white; border-color: var(--primary); }
+        .step-completed { background-color: var(--secondary); color: white; border-color: var(--secondary); }
 
-        /* Toast Notifications */
-        #toast-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
         .toast {
-            min-width: 300px;
-            padding: 16px 24px;
-            border-radius: 8px;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: translateX(120%);
+            min-width: 300px; padding: 16px 24px; border-radius: 8px; background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateX(120%);
             transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            display: flex; align-items: center; gap: 12px;
         }
-        .dark .toast {
-            background: #1E293B;
-            color: white;
-        }
-        .toast.show {
-            transform: translateX(0);
-        }
+        .dark .toast { background: #1E293B; color: white; }
+        .toast.show { transform: translateX(0); }
         
-        /* Video Loader overlay */
         .loader-overlay {
-            position: fixed;
-            inset: 0;
-            background: #F7F9FC; 
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: fixed; inset: 0; background: #F7F9FC; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: opacity 0.5s;
         }
-        .dark .loader-overlay {
-            background: #0F172A;
-        }
-        #loader-video {
-            width: 100%;
-            max-width: 800px;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
+        .dark .loader-overlay { background: #0F172A; }
+        #loader-video { width: 100%; max-width: 800px; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
 
-        /* View Management */
-        .app-view {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-        }
-        .app-view.active {
-            display: block;
-            opacity: 1;
-        }
+        .app-view { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
+        .app-view.active { display: block; opacity: 1; }
 
-        /* Form Inputs */
         .input-field {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid #CBD5E1;
-            background-color: white;
-            transition: all 0.2s;
+            width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #CBD5E1;
+            background-color: white; transition: all 0.2s;
         }
-        .dark .input-field {
-            background-color: #0F172A;
-            border-color: #334155;
-            color: white;
-        }
-        .input-field:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(29, 111, 165, 0.2);
-        }
+        .dark .input-field { background-color: #0F172A; border-color: #334155; color: white; }
+        .input-field:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(29, 111, 165, 0.2); }
 
-        /* Mobile Progress Bar Adjustments */
         @media (max-width: 640px) {
-            .step-marker {
-                width: 2rem;
-                height: 2rem;
-                font-size: 0.875rem;
-            }
+            .step-marker { width: 2rem; height: 2rem; font-size: 0.875rem; }
         }
-        
-        /* Specific utility for our team member panel to not hide content ungracefully */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 20px; }
     </style>
 </head>
-<!-- Default strictly to light mode (white) until manually toggled -->
 <body class="antialiased transition-colors duration-300">
 
-    <!-- Video Loader Overlay -->
     <div id="global-loader" class="loader-overlay">
-        <!-- Video automatically plays (muted required for autoplay policies) -->
         <video id="loader-video" autoplay muted playsinline>
             <source src="WhatsApp Video 2026-08-03 at 10.43.58 AM.mp4" type="video/mp4">
         </video>
@@ -244,7 +152,7 @@
         <div class="glass mx-auto max-w-7xl mt-4 rounded-full px-6 py-3 flex justify-between items-center shadow-sm">
             <div class="flex items-center gap-3 cursor-pointer" onclick="state.currentView !== 'landing' ? navigateTo('landing') : null">
                 <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden">
-                    <img src="LOGO_Malcon.png" alt="Logo" class="w-full h-full object-cover">
+                    <img src="LOGO_Malcon.png" alt="Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
                     <h1 class="font-heading font-bold text-lg leading-tight text-primary dark:text-white">MALCON '26</h1>
@@ -340,10 +248,10 @@
                         </div>
                     </div>
 
-                    <!-- Countdown Timer Glass Card -->
+                    <!-- Countdown Timer -->
                     <div class="reveal glass rounded-3xl p-4 sm:p-6 lg:p-10 shadow-xl border border-white/40 dark:border-gray-700/50 relative">
                         <div class="absolute -top-6 -right-6 w-24 h-24 bg-accent rounded-full blur-2xl opacity-50 z-0"></div>
-                        <h3 class="font-heading text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-center z-10 relative dark:text-white">Conference Starts In</h3>
+                        <h3 class="font-heading text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-center z-10 relative dark:text-white">Registration Ends In</h3>
                         <div class="grid grid-cols-4 gap-2 sm:gap-4 z-10 relative">
                             <div class="text-center">
                                 <div id="cd-days" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
@@ -366,6 +274,7 @@
                 </div>
             </section>
 
+            <!-- About Section -->
             <section id="about" class="py-20 bg-white dark:bg-dark-surface">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center max-w-3xl mx-auto mb-16 reveal">
@@ -408,6 +317,7 @@
                 </div>
             </section>
 
+            <!-- Fees Section -->
             <section id="fees" class="py-20 bg-gray-50 dark:bg-dark-bg">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center max-w-3xl mx-auto mb-16 reveal">
@@ -418,7 +328,7 @@
                     <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                         <!-- Student Card -->
                         <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8 border border-gray-100 dark:border-slate-700 reveal relative overflow-hidden">
-                            <h3 class="text-xl font-heading font-bold mb-2 dark:text-white">Students</h3>
+                            <h3 class="text-xl font-heading font-bold mb-2 dark:text-white">Solo - Student</h3>
                             <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">For undergraduate and postgraduate students.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
@@ -436,7 +346,7 @@
                         <!-- Professional Card -->
                         <div class="bg-primary text-white rounded-3xl shadow-xl p-8 transform md:-translate-y-4 reveal relative overflow-hidden border border-blue-600 shadow-glow">
                             <div class="absolute top-0 right-0 bg-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
-                            <h3 class="text-xl font-heading font-bold mb-2">Professionals</h3>
+                            <h3 class="text-xl font-heading font-bold mb-2">Solo - Professional</h3>
                             <p class="text-sm text-blue-200 mb-6">For physiotherapists, clinicians, and researchers.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-blue-700 pb-2">
@@ -448,7 +358,9 @@
                                     <span class="font-bold text-white">₹3,500</span>
                                 </div>
                             </div>
-                            <button onclick="navigateTo('register')" class="w-full py-3 rounded-full bg-accent hover:bg-orange-500 text-white transition-colors font-bold shadow-md">Register as Professional</button>
+                            <button onclick="navigateTo('register')" class="bg-primary hover:bg-secondary text-white px-8 py-3.5 rounded-full font-bold text-lg transition-all shadow-soft hover:shadow-xl transform hover:-translate-y-1">
+                                Register Now
+                            </button>
                         </div>
 
                         <!-- Group Card -->
@@ -518,7 +430,7 @@
                                         <option value="Team of 50">Group - Team of 50 (₹2,000 per participant)</option>
                                     </select>
                                     <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-sm text-blue-800 dark:text-blue-300">
-                                        <i class="fas fa-info-circle mr-2"></i> For group registrations, you will need to provide the individual details for all team members in Step 4. Pricing automatically switches to On-Spot on August 21st.
+                                        <i class="fas fa-info-circle mr-2"></i> For group registrations, you will need to provide the details for all team members in Step 4. Pricing automatically switches to On-Spot on August 21st.
                                     </div>
                                 </div>
                             </div>
@@ -626,7 +538,7 @@
                                 <div class="grid md:grid-cols-2 gap-8">
                                     <!-- Payment Instructions -->
                                     <div class="order-2 md:order-1">
-                                        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 mb-6">
+                                        <div class="bg-blue-50 dark:bg-blue-955 border border-blue-200 dark:border-blue-900 rounded-xl p-6 mb-6">
                                             <h4 class="font-heading font-bold text-primary dark:text-blue-300 mb-2"><i class="fas fa-university mr-2"></i>Bank Transfer Details</h4>
                                             <p class="text-xs text-gray-600 dark:text-gray-400 mb-4">Please transfer the total amount shown to the following account or scan the QR code.</p>
                                             
@@ -638,7 +550,6 @@
                                             </div>
                                             
                                             <div class="bg-white dark:bg-slate-800 p-2 rounded-lg w-full max-w-sm mx-auto border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
-                                                <!-- Directly linking the provided image file verbatim -->
                                                 <img src="payment_scanner.png" alt="ICICI UPI QR Code" class="w-full h-auto object-contain" onerror="this.src='https://placehold.co/400x300/0B3C6D/FFFFFF?text=QR+Code+Unavailable'">
                                             </div>
                                         </div>
@@ -671,7 +582,7 @@
                                             </div>
                                             
                                             <div class="flex justify-between items-center mb-6 text-sm font-medium">
-                                                <span class="text-gray-600 dark:text-gray-300">Phase Applied:</span>
+                                                <span>Phase Applied:</span>
                                                 <span id="summary-phase" class="text-green-600">Regular Phase</span>
                                             </div>
                                             
@@ -691,10 +602,10 @@
                                 </button>
                                 
                                 <button type="button" id="btn-next" onclick="nextStep()" class="ml-auto px-8 py-2.5 rounded-full bg-primary hover:bg-secondary text-white font-bold transition-all shadow-md">
-                                    Next Step <i class="fas fa-arrow-right ml-2"></i>
+                                    Next Step <i class="fas fa-arrow-right mr-2"></i>
                                 </button>
                                 
-                                <button type="submit" id="btn-submit" onclick="submitRegistration()" class="hidden ml-auto px-8 py-2.5 rounded-full bg-accent hover:bg-orange-500 text-white font-bold transition-all shadow-md">
+                                <button type="button" id="btn-submit" onclick="submitRegistration()" class="hidden ml-auto px-8 py-2.5 rounded-full bg-accent hover:bg-orange-500 text-white font-bold transition-all shadow-md">
                                     Submit Registration <i class="fas fa-check ml-2"></i>
                                 </button>
                             </div>
@@ -710,6 +621,12 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <h2 class="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4 reveal active" style="transition-delay: 100ms">Registration Submitted Successfully!</h2>
+                
+                <div class="my-6 p-4 rounded-xl bg-blue-50 dark:bg-blue-955 border border-blue-200 dark:border-blue-900 text-slate-800 dark:text-blue-300 font-semibold text-sm max-w-md mx-auto">
+                    Unique Payment Tracking ID: <br>
+                    <span id="success-payment-id" class="font-heading text-lg font-extrabold text-accent">PAY-MAL-XXXXXX</span>
+                </div>
+
                 <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 reveal active" style="transition-delay: 200ms">
                     Your registration has been received. Our verification team will verify your payment and details within 24-48 hours.
                 </p>
@@ -730,6 +647,26 @@
         </section>
 
         <section id="view-admin" class="app-view hidden">
+            
+            <!-- Admin Password Overlay -->
+            <div id="admin-login-overlay" class="fixed inset-0 bg-slate-900 z-[60] flex flex-col items-center justify-center backdrop-blur-md transition-opacity">
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl w-full max-w-sm shadow-2xl border border-gray-200 dark:border-slate-700 text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-lg">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">Admin Access Restricted</h3>
+                    <p class="text-sm text-gray-500 mb-6">Please enter the master password to access the dashboard.</p>
+                    
+                    <input type="password" id="admin-password-input" class="input-field mb-4 text-center tracking-widest" placeholder="••••••••">
+                    
+                    <div class="flex gap-3">
+                        <button onclick="navigateTo('landing')" class="flex-1 py-2.5 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 font-semibold transition">Cancel</button>
+                        <button onclick="verifyAdminPassword()" class="flex-1 py-2.5 rounded-lg bg-primary hover:bg-secondary text-white font-semibold shadow-md transition">Unlock</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Content -->
             <div class="flex h-screen bg-gray-50 dark:bg-dark-bg -mt-24 pt-24 fixed w-full z-40 top-0 left-0">
                 <div class="w-64 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 hidden md:flex flex-col">
                     <div class="p-6">
@@ -738,13 +675,10 @@
                             <a href="#" class="flex items-center gap-3 px-4 py-2.5 bg-primary/10 text-primary dark:text-blue-400 rounded-lg font-medium">
                                 <i class="fas fa-th-large"></i> Overview
                             </a>
-                            <a href="#" onclick="showEmailTemplates()" class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg font-medium transition-colors">
-                                <i class="fas fa-envelope"></i> Email Templates
-                            </a>
                         </nav>
                     </div>
                     <div class="mt-auto p-6">
-                        <button onclick="navigateTo('landing')" class="w-full py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700">Exit Admin</button>
+                        <button onclick="logoutAdmin()" class="w-full py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition">Log Out</button>
                     </div>
                 </div>
 
@@ -752,29 +686,29 @@
                     <div class="flex justify-between items-center mb-8">
                         <div>
                             <h2 class="text-2xl font-heading font-bold text-gray-900 dark:text-white">Dashboard</h2>
-                            <p class="text-sm text-gray-500">Manage MALCON 2026 registrations.</p>
+                            <p class="text-sm text-gray-500">Manage all MALCON 2026 participants.</p>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="testMakeWebhook()" class="text-sm bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 px-4 py-2 rounded-lg font-medium hover:bg-blue-200 transition shadow-sm">
-                                <i class="fas fa-paper-plane mr-1"></i> Test Webhook
+                            <button onclick="testAppsScriptConnection()" class="text-sm bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 px-4 py-2 rounded-lg font-medium hover:bg-blue-200 transition shadow-sm">
+                                <i class="fas fa-plug mr-1"></i> Test Connection
                             </button>
-                            <button onclick="seedMockData()" class="text-sm bg-gray-200 dark:bg-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-slate-600 transition shadow-sm">
-                                <i class="fas fa-magic mr-1"></i> Add Mock Data
+                            <button onclick="exportToCSV()" class="text-sm bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition shadow-sm">
+                                <i class="fas fa-file-csv mr-1"></i> Export CSV
                             </button>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
-                            <div class="text-gray-500 text-sm font-medium mb-1">Total Registrations</div>
+                            <div class="text-gray-500 text-sm font-medium mb-1">Total Individuals</div>
                             <div class="text-3xl font-bold text-gray-900 dark:text-white" id="stat-total">0</div>
                         </div>
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
-                            <div class="text-amber-500 text-sm font-medium mb-1">Pending</div>
+                            <div class="text-amber-500 text-sm font-medium mb-1">Pending Orders</div>
                             <div class="text-3xl font-bold text-amber-600 dark:text-amber-400" id="stat-pending">0</div>
                         </div>
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
-                            <div class="text-green-500 text-sm font-medium mb-1">Approved</div>
+                            <div class="text-green-500 text-sm font-medium mb-1">Approved Orders</div>
                             <div class="text-3xl font-bold text-green-600 dark:text-green-400" id="stat-approved">0</div>
                         </div>
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700">
@@ -785,7 +719,7 @@
 
                     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
                         <div class="p-6 border-b border-gray-100 dark:border-slate-700 flex justify-between items-center">
-                            <h3 class="font-bold text-gray-900 dark:text-white">Recent Submissions</h3>
+                            <h3 class="font-bold text-gray-900 dark:text-white">All Participants (Flattened List)</h3>
                             <div class="text-sm font-medium text-gray-500">
                                 Food: <span id="stat-veg" class="text-green-600 mr-2">0 Veg</span> <span id="stat-nonveg" class="text-red-600">0 Non-Veg</span>
                             </div>
@@ -794,16 +728,17 @@
                             <table class="w-full text-left border-collapse">
                                 <thead>
                                     <tr class="bg-gray-50 dark:bg-slate-900 text-xs uppercase text-gray-500 dark:text-gray-400 font-semibold border-b border-gray-200 dark:border-slate-700">
-                                        <th class="p-4">ID / Date</th>
+                                        <th class="p-4">Reg ID</th>
                                         <th class="p-4">Participant info</th>
-                                        <th class="p-4">Category & Fee</th>
-                                        <th class="p-4 text-center">Docs</th>
-                                        <th class="p-4 text-center">Status</th>
+                                        <th class="p-4">Category & Role</th>
+                                        <th class="p-4">Payment Tracking ID</th>
+                                        <th class="p-4">Food</th>
+                                        <th class="p-4 text-center">Order Status</th>
                                         <th class="p-4 text-right">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="admin-table-body" class="text-sm divide-y divide-gray-100 dark:divide-slate-700">
-                                    <tr><td colspan="6" class="p-8 text-center text-gray-500">No registrations found.</td></tr>
+                                    <tr><td colspan="7" class="p-8 text-center text-gray-500">No participants found.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -815,58 +750,12 @@
             <div id="reject-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex-col justify-center items-center backdrop-blur-sm">
                 <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl w-full max-w-md shadow-xl transform transition-all">
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Reject Registration</h3>
-                    <p class="text-sm text-gray-500 mb-4">Please provide a reason for rejection. This will be sent to the user.</p>
+                    <p class="text-sm text-gray-500 mb-4">Please provide a reason for rejection.</p>
                     <input type="hidden" id="reject-id">
                     <textarea id="reject-reason" rows="3" class="w-full p-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-gray-50 dark:bg-slate-900 mb-4 focus:outline-none focus:border-red-500" placeholder="e.g. Payment screenshot is illegible."></textarea>
                     <div class="flex justify-end gap-3">
                         <button onclick="closeRejectModal()" class="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-700 font-medium">Cancel</button>
                         <button onclick="confirmReject()" class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-bold">Confirm Rejection</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Email Templates Modal -->
-            <div id="email-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex-col justify-center items-center backdrop-blur-sm p-4">
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-auto shadow-xl">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Email Templates</h3>
-                        <button onclick="document.getElementById('email-modal').classList.add('hidden')" class="text-gray-500 hover:text-gray-800 text-xl"><i class="fas fa-times"></i></button>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="border border-gray-200 dark:border-slate-600 rounded-xl overflow-hidden">
-                            <div class="bg-gray-100 dark:bg-slate-900 p-3 text-sm font-medium border-b border-gray-200 dark:border-slate-600">Subject: Registration Confirmed - MALCON 2026</div>
-                            <div class="p-6 bg-white text-gray-800 text-sm">
-                                <div class="text-center mb-4 border-b pb-4">
-                                    <h2 class="text-xl font-bold text-[#0B3C6D]">MALCON 2026</h2>
-                                    <p>International Physiotherapy Conference</p>
-                                </div>
-                                <p>Dear <strong>[Name]</strong>,</p>
-                                <p class="my-3">Congratulations! Your registration for MALCON 2026 has been verified and confirmed.</p>
-                                <p class="mb-4">Attached below is your official QR entry pass. Please present this at the venue for seamless check-in and food collection.</p>
-                                <div class="bg-gray-100 p-4 rounded text-center my-4">
-                                    <p class="font-mono text-xs text-gray-500 mb-2">REG ID: [ID]</p>
-                                    <div class="w-32 h-32 bg-white border mx-auto flex items-center justify-center text-xs text-gray-400">[QR CODE IMG]</div>
-                                </div>
-                                <p class="text-xs text-gray-500 text-center mt-6">Powered by FESTORA</p>
-                            </div>
-                        </div>
-
-                        <div class="border border-gray-200 dark:border-slate-600 rounded-xl overflow-hidden">
-                            <div class="bg-gray-100 dark:bg-slate-900 p-3 text-sm font-medium border-b border-gray-200 dark:border-slate-600">Subject: Action Required - MALCON 2026</div>
-                            <div class="p-6 bg-white text-gray-800 text-sm">
-                                <div class="text-center mb-4 border-b pb-4">
-                                    <h2 class="text-xl font-bold text-[#0B3C6D]">MALCON 2026</h2>
-                                </div>
-                                <p>Dear <strong>[Name]</strong>,</p>
-                                <p class="my-3">We reviewed your registration for MALCON 2026. Unfortunately, we could not verify your payment.</p>
-                                <div class="bg-red-50 border-l-4 border-red-500 p-3 text-red-700 my-4">
-                                    <strong>Reason:</strong> [Rejection Reason]
-                                </div>
-                                <p>Please contact support or re-register with valid payment proof.</p>
-                                <p class="text-xs text-gray-500 text-center mt-8">Powered by FESTORA</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -880,7 +769,6 @@
                 <div class="relative bg-black rounded-2xl aspect-square mb-8 overflow-hidden border-4 border-gray-800 shadow-2xl flex items-center justify-center">
                     <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
                     
-                    <!-- Scanner Animation -->
                     <div class="absolute w-full h-1 bg-accent shadow-[0_0_15px_#F28C28] animate-[scan_2s_ease-in-out_infinite]"></div>
                     
                     <div class="absolute w-3/4 h-3/4 border-2 border-primary/50 border-dashed rounded-lg">
@@ -899,7 +787,6 @@
                     </div>
                 </div>
 
-                <!-- Result Card -->
                 <div id="scan-result" class="hidden bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700 text-left transition-all">
                     <div class="flex items-center gap-4 border-b border-gray-100 dark:border-slate-700 pb-4 mb-4">
                         <div class="w-12 h-12 rounded-full bg-blue-100 text-primary flex items-center justify-center text-xl font-bold font-heading" id="scan-initial">A</div>
@@ -965,6 +852,14 @@
                 </div>
 
                 <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white mb-4 uppercase text-sm tracking-wider">Contact Us</h4>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 font-medium">
+                        <li><i class="fas fa-phone-alt mr-2 text-primary dark:text-blue-400"></i> +91 8639813168</li>
+                        <li><i class="fas fa-envelope mr-2 text-primary dark:text-blue-400"></i> festora@221blabs.com</li>
+                    </ul>
+                </div>
+
+                <div>
                     <h4 class="font-bold text-gray-900 dark:text-white mb-4 uppercase text-sm tracking-wider">Powered By</h4>
                     <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-xl border border-gray-100 dark:border-slate-700">
                         <div class="font-heading font-bold text-lg text-primary dark:text-white mb-1">FESTORA</div>
@@ -987,7 +882,7 @@
 
     <script>
         // --- CONSTANTS & STATE ---
-        const WEBHOOK_URL = 'https://hook.eu1.make.com/gxv1r5lsklwppjus3bzmsemekjr5p6z6'; 
+        const GOOGLE_DRIVE_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbynCW3i5joHNUZCT9b8I-6Pvdf2VnI7KDQyYDFIrleI5tHU9jlSynM-JgGGAcIrk9eX/exec'; // Your Google Apps Script Web App URL
         
         let state = {
             currentView: 'landing',
@@ -995,7 +890,8 @@
             formStep: 1,
             totalSteps: 5,
             registrations: [],
-            checkinData: null
+            checkinData: null,
+            adminAuthenticated: false
         };
 
         // --- INIT ---
@@ -1003,6 +899,8 @@
             const savedRegs = localStorage.getItem('festora_regs');
             if(savedRegs) {
                 state.registrations = JSON.parse(savedRegs);
+            } else {
+                seedMockData(); // Seed basic entries if database is pristine
             }
             initCountdown();
 
@@ -1019,12 +917,9 @@
             }
 
             if (loaderVideo) {
-                // Wait for the video to finish playing before hiding the loader
                 loaderVideo.addEventListener('ended', hideLoader);
-                
-                // Fallbacks in case the video fails to load or browser blocks autoplay
                 loaderVideo.addEventListener('error', hideLoader);
-                setTimeout(hideLoader, 12000); // 12-second max timeout fallback
+                setTimeout(hideLoader, 12000); // fallback
             } else {
                 setTimeout(hideLoader, 800);
             }
@@ -1067,8 +962,16 @@
             return 'MAL' + Math.floor(10000 + Math.random() * 90000);
         }
 
-        // --- NAVIGATION & ROUTING ---
         function navigateTo(viewId) {
+            
+            // Check Admin Security
+            if(viewId === 'admin' && !state.adminAuthenticated) {
+                document.getElementById('admin-login-overlay').style.display = 'flex';
+                document.getElementById('admin-password-input').value = '';
+            } else {
+                document.getElementById('admin-login-overlay').style.display = 'none';
+            }
+
             document.querySelectorAll('.app-view').forEach(v => {
                 v.classList.remove('active');
                 setTimeout(() => { if(!v.classList.contains('active')) v.style.display = 'none'; }, 400);
@@ -1092,8 +995,26 @@
                 view.classList.add('active');
                 state.currentView = viewId;
                 window.scrollTo(0, 0);
-                if(viewId === 'admin') refreshAdminDashboard();
+                if(viewId === 'admin' && state.adminAuthenticated) refreshAdminDashboard();
             }
+        }
+
+        function verifyAdminPassword() {
+            const input = document.getElementById('admin-password-input').value;
+            if(input === 'GreatestThereIs') {
+                state.adminAuthenticated = true;
+                document.getElementById('admin-login-overlay').style.display = 'none';
+                showToast("Admin Access Granted", "success");
+                refreshAdminDashboard();
+            } else {
+                showToast("Incorrect Password", "error");
+            }
+        }
+
+        function logoutAdmin() {
+            state.adminAuthenticated = false;
+            navigateTo('landing');
+            showToast("Logged out successfully", "info");
         }
 
         function toggleMobileMenu() {
@@ -1116,7 +1037,7 @@
 
         // --- LANDING PAGE LOGIC ---
         function initCountdown() {
-            const countDownDate = new Date("Aug 21, 2026 08:00:00").getTime();
+            const countDownDate = new Date("Aug 12, 2026 08:00:00").getTime(); // target date updated to 12 August 2026 [1.1.2]
             const x = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = countDownDate - now;
@@ -1132,7 +1053,6 @@
             }, 1000);
         }
 
-        // --- REGISTRATION FORM LOGIC ---
         function updateStepUI() {
             document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
             document.getElementById(`step-${state.formStep}`).classList.remove('hidden');
@@ -1174,7 +1094,6 @@
             const inputs = currentDiv.querySelectorAll('input[required], select[required]');
             let isValid = true;
             
-            // Special validation for radio buttons (Food Preference)
             if (state.formStep === 3) {
                 const radios = document.querySelectorAll('input[name="food"]:checked');
                 if (radios.length === 0) {
@@ -1324,7 +1243,7 @@
             const cat = document.getElementById('reg-category').value;
             
             const now = new Date();
-            const onSpotDate = new Date("2026-08-21T00:00:00"); 
+            const onSpotDate = new Date("2026-08-12T00:00:00"); // ends date updated to 12 august 2026
             const isOnSpot = now >= onSpotDate; 
             
             let totalFee = 0;
@@ -1368,56 +1287,159 @@
             document.getElementById('summary-total').innerText = `₹${totalFee.toLocaleString()}`;
         }
 
-        const fileToBase64 = file => new Promise((resolve, reject) => {
+        // --- COMPRESSION AND FILE PIPELINE ENGINE ---
+        const compressAndConvertFile = file => new Promise((resolve, reject) => {
             if(!file) return resolve(null);
+            
+            // Bypass canvas compression pipeline if item is PDF
+            if (!file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve({
+                    filename: file.name,
+                    dataUri: reader.result 
+                });
+                reader.onerror = error => reject(error);
+                return;
+            }
+
+            // Image Compression routine
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = () => resolve({
-                filename: file.name,
-                mimeType: file.type,
-                data: reader.result.split(',')[1] 
-            });
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    const maxWidth = 1000;
+
+                    if (width > maxWidth) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Output at JPEG quality parameters (0.7) to restrict payload sizes
+                    const compressedDataUri = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    resolve({
+                        filename: file.name.replace(/\.[^/.]+$/, "") + ".jpg",
+                        dataUri: compressedDataUri
+                    });
+                };
+                img.onerror = error => reject(error);
+                img.src = e.target.result;
+            };
             reader.onerror = error => reject(error);
         });
 
+        // Fire-and-forget submission directly to Google Web App [1.1.1]
+        function submitPayloadToGoogleWebApp(payload) {
+            if (!GOOGLE_DRIVE_UPLOAD_URL || GOOGLE_DRIVE_UPLOAD_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL_HERE')) {
+                console.error("Google Apps Script Web App URL endpoint is not configured.");
+                return; 
+            }
+            // Dispatches the POST asynchronously and ignores any CORS response parsing issues [1.1.1]
+            fetch(GOOGLE_DRIVE_UPLOAD_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(payload)
+            }).catch(err => console.warn("Direct upload processed in background.", err));
+        }
+
+        // Asynchronous non-blocking background queue handler
+        async function runBackgroundUpload(primaryData, teamMembersData) {
+            try {
+                console.log("Background processor has safely started...");
+                
+                // Process and optimize primary files
+                const paymentScreenshotFile = primaryData.rawPayFile ? await compressAndConvertFile(primaryData.rawPayFile) : null;
+                const idCardFile = primaryData.rawIdFile ? await compressAndConvertFile(primaryData.rawIdFile) : null;
+
+                const primaryPayload = {
+                    id: primaryData.id,
+                    groupId: primaryData.groupId,
+                    paymentUniqueId: primaryData.paymentUniqueId,
+                    role: "Primary",
+                    timestamp: primaryData.timestamp,
+                    status: 'Pending',
+                    name: primaryData.name,
+                    age: primaryData.age,
+                    gender: primaryData.gender,
+                    phone: primaryData.phone,
+                    email: primaryData.email,
+                    designation: primaryData.designation,
+                    institution: primaryData.institution,
+                    affiliation: primaryData.affiliation,
+                    food: primaryData.food,
+                    category: primaryData.category,
+                    amount: primaryData.amount,
+                    idCard: idCardFile,
+                    paymentScreenshot: paymentScreenshotFile
+                };
+
+                // Asynchronously transfer primary details
+                submitPayloadToGoogleWebApp(primaryPayload);
+
+                // Sequentially optimize and transfer team members in background
+                for (let i = 0; i < teamMembersData.length; i++) {
+                    const member = teamMembersData[i];
+                    const compressedMemberId = member.rawIdFile ? await compressAndConvertFile(member.rawIdFile) : null;
+
+                    const teamMemberPayload = {
+                        id: primaryData.id + `-${member.index}`,
+                        groupId: primaryData.groupId,
+                        paymentUniqueId: primaryData.paymentUniqueId,
+                        role: "Team Member",
+                        timestamp: primaryData.timestamp,
+                        status: 'Pending',
+                        name: member.name,
+                        age: member.age,
+                        gender: member.gender,
+                        phone: member.phone,
+                        email: member.email,
+                        designation: member.designation,
+                        institution: member.institution,
+                        affiliation: primaryData.affiliation,
+                        food: member.food,
+                        category: primaryData.category,
+                        amount: '-',
+                        idCard: compressedMemberId,
+                        paymentScreenshot: null
+                    };
+
+                    submitPayloadToGoogleWebApp(teamMemberPayload);
+                }
+                console.log("Background processing queue execution complete.");
+            } catch (err) {
+                console.error("Asynchronous background error: ", err);
+            }
+        }
+
+        // Sequential Submission with Direct Drive Mapping & Resiliency Fallback
         async function submitRegistration() {
             if (!validateStep()) return;
 
-            const btn = document.getElementById('btn-submit');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            btn.disabled = true;
-
             try {
-                const idFileInput = document.getElementById('reg-id-upload');
-                const payFileInput = document.getElementById('reg-payment-upload');
-                const idCardFile = await fileToBase64(idFileInput.files[0]);
-                const paymentScreenshotFile = await fileToBase64(payFileInput.files[0]);
-
+                // 1. Instantly capture form entries and file references before reset sequence
                 const cat = document.getElementById('reg-category').value;
-                let teamMembers = [];
-                
-                if (cat === 'Team of 25' || cat === 'Team of 50') {
-                    const count = cat === 'Team of 25' ? 24 : 49;
-                    for (let i = 1; i <= count; i++) {
-                        const fileInput = document.getElementById(`member-${i+1}-id`);
-                        teamMembers.push({
-                            name: document.getElementById(`member-${i+1}-name`).value,
-                            email: document.getElementById(`member-${i+1}-email`).value,
-                            phone: document.getElementById(`member-${i+1}-phone`).value,
-                            age: document.getElementById(`member-${i+1}-age`).value,
-                            gender: document.getElementById(`member-${i+1}-gender`).value,
-                            designation: document.getElementById(`member-${i+1}-designation`).value,
-                            institution: document.getElementById(`member-${i+1}-institution`).value,
-                            food: document.getElementById(`member-${i+1}-food`).value,
-                            idCardFilename: fileInput?.files[0]?.name || 'not-provided.pdf'
-                        });
-                    }
-                }
+                const uniquePaymentID = "PAY-MAL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+                const uniqueGroupId = "GRP-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7).toUpperCase();
+                const timestamp = new Date().toISOString();
+                const primaryId = generateID();
 
-                const formData = {
-                    id: generateID(),
-                    timestamp: new Date().toISOString(),
+                const primaryData = {
+                    id: primaryId,
+                    groupId: uniqueGroupId,
+                    paymentUniqueId: uniquePaymentID,
+                    role: "Primary",
+                    timestamp: timestamp,
                     status: 'Pending',
                     name: document.getElementById('reg-name').value,
                     age: document.getElementById('reg-age').value,
@@ -1426,61 +1448,200 @@
                     email: document.getElementById('reg-email').value,
                     designation: document.getElementById('reg-designation').value,
                     institution: document.getElementById('reg-institution').value,
-                    affiliation: document.getElementById('reg-affiliation').value,
-                    food: document.querySelector('input[name="food"]:checked').value,
+                    affiliation: document.getElementById('reg-affiliation').value || 'N/A',
+                    food: document.querySelector('input[name="food"]:checked') ? document.querySelector('input[name="food"]:checked').value : 'Veg',
                     category: cat,
                     amount: document.getElementById('summary-total').innerText,
-                    idProofMock: idFileInput.files[0]?.name || 'document.pdf',
-                    paymentMock: payFileInput.files[0]?.name || 'screenshot.jpg',
-                    teamMembers: teamMembers,
-                    entryDone: false,
-                    foodDone: false,
-                    idCard: idCardFile,
-                    paymentScreenshot: paymentScreenshotFile
+                    rawIdFile: document.getElementById('reg-id-upload').files[0],
+                    rawPayFile: document.getElementById('reg-payment-upload').files[0]
                 };
 
-                if (WEBHOOK_URL && WEBHOOK_URL.includes('make.com')) {
-                    await fetch(WEBHOOK_URL, { 
-                        method: 'POST', 
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData) 
-                    });
-                    console.log("Sent payload to Make.com successfully.");
-                } else {
-                    console.log("Mock Webhook payload dispatched:", formData);
-                    await new Promise(r => setTimeout(r, 1500)); 
+                let teamMembersData = [];
+                if (cat === 'Team of 25' || cat === 'Team of 50') {
+                    const count = cat === 'Team of 25' ? 24 : 49;
+                    for (let i = 1; i <= count; i++) {
+                        const memberIdInput = document.getElementById(`member-${i+1}-id`);
+                        teamMembersData.push({
+                            index: i + 1,
+                            name: document.getElementById(`member-${i+1}-name`).value,
+                            email: document.getElementById(`member-${i+1}-email`).value,
+                            phone: document.getElementById(`member-${i+1}-phone`).value,
+                            age: document.getElementById(`member-${i+1}-age`).value,
+                            gender: document.getElementById(`member-${i+1}-gender`).value,
+                            designation: document.getElementById(`member-${i+1}-designation`).value,
+                            institution: document.getElementById(`member-${i+1}-institution`).value,
+                            food: document.getElementById(`member-${i+1}-food`).value,
+                            rawIdFile: memberIdInput ? memberIdInput.files[0] : null
+                        });
+                    }
                 }
-                
-                state.registrations.unshift(formData);
-                localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
-                
+
+                // 2. Direct user to success view immediately with no loading pauses
+                document.getElementById('success-payment-id').innerText = uniquePaymentID;
+                navigateTo('success');
+
+                // 3. Clear form visual elements in background immediately
                 document.getElementById('registration-form').reset();
-                document.getElementById('team-members-container').innerHTML = '';
+                const teamContainer = document.getElementById('team-members-container');
+                if (teamContainer) {
+                    teamContainer.innerHTML = '';
+                    teamContainer.classList.add('hidden');
+                }
                 state.formStep = 1;
                 updateStepUI();
                 
                 document.getElementById('id-preview').classList.add('hidden');
                 document.getElementById('payment-preview').classList.add('hidden');
-                
-                navigateTo('success');
+
+                // 4. Update memory structures immediately so entries display on local views
+                const localTeamMembers = teamMembersData.map(m => ({
+                    name: m.name,
+                    email: m.email,
+                    phone: m.phone,
+                    age: m.age,
+                    gender: m.gender,
+                    designation: m.designation,
+                    institution: m.institution,
+                    food: m.food,
+                    entryDone: false,
+                    foodDone: false
+                }));
+
+                const localPrimaryObj = {
+                    id: primaryData.id,
+                    groupId: primaryData.groupId,
+                    paymentUniqueId: primaryData.paymentUniqueId,
+                    role: "Primary",
+                    timestamp: primaryData.timestamp,
+                    status: 'Pending',
+                    name: primaryData.name,
+                    age: primaryData.age,
+                    gender: primaryData.gender,
+                    phone: primaryData.phone,
+                    email: primaryData.email,
+                    designation: primaryData.designation,
+                    institution: primaryData.institution,
+                    affiliation: primaryData.affiliation,
+                    food: primaryData.food,
+                    category: primaryData.category,
+                    amount: primaryData.amount,
+                    entryDone: false,
+                    foodDone: false,
+                    teamMembers: localTeamMembers
+                };
+
+                state.registrations.unshift(localPrimaryObj);
+                localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
+
+                // 5. Trigger the asynchronous uploading routine quietly in the background
+                runBackgroundUpload(primaryData, teamMembersData);
+
             } catch (err) {
-                console.error(err);
-                showToast("Failed to submit. Please try again.", "error");
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                console.error("Critical flow disruption detected: ", err);
+                showToast("Encountered problem processing request.", "error");
             }
         }
 
-        // --- ADMIN PANEL LOGIC ---
+        // --- FLATTENED LIST GENERATOR ---
+        function getFlattenedParticipants() {
+            let participants = [];
+            state.registrations.forEach(reg => {
+                // Primary
+                participants.push({
+                    regId: reg.id,
+                    role: 'Primary',
+                    status: reg.status,
+                    date: new Date(reg.timestamp).toLocaleDateString('en-GB'),
+                    name: reg.name,
+                    email: reg.email,
+                    phone: reg.phone,
+                    age: reg.age,
+                    gender: reg.gender,
+                    designation: reg.designation,
+                    institution: reg.institution,
+                    food: reg.food,
+                    category: reg.category,
+                    amount: reg.amount,
+                    paymentUniqueId: reg.paymentUniqueId || '-',
+                    entryDone: reg.entryDone || false,
+                    foodDone: reg.foodDone || false
+                });
+                
+                // Team Members
+                if (reg.teamMembers && reg.teamMembers.length > 0) {
+                    reg.teamMembers.forEach((member, index) => {
+                        participants.push({
+                            regId: reg.id + `-${index+2}`,
+                            role: `Team Member ${index+2}`,
+                            status: reg.status,
+                            date: new Date(reg.timestamp).toLocaleDateString('en-GB'),
+                            name: member.name,
+                            email: member.email,
+                            phone: member.phone,
+                            age: member.age,
+                            gender: member.gender,
+                            designation: member.designation,
+                            institution: member.institution,
+                            food: member.food,
+                            category: reg.category,
+                            amount: '-',
+                            paymentUniqueId: reg.paymentUniqueId || '-',
+                            entryDone: member.entryDone || false,
+                            foodDone: member.foodDone || false
+                        });
+                    });
+                }
+            });
+            return participants;
+        }
+
+        function exportToCSV() {
+            const data = getFlattenedParticipants();
+            if(data.length === 0) return showToast("No data to export", "error");
+            
+            const headers = ["Reg ID", "Role", "Status", "Date", "Name", "Email", "Phone", "Age", "Gender", "Designation", "Institution", "Food", "Category", "Payment ID"];
+            const csvRows = [];
+            csvRows.push(headers.join(','));
+            
+            data.forEach(row => {
+                const values = [
+                    `"${row.regId}"`,
+                    `"${row.role}"`,
+                    `"${row.status}"`,
+                    `"${row.date}"`,
+                    `"${row.name.replace(/"/g, '""')}"`,
+                    `"${row.email}"`,
+                    `"${row.phone}"`,
+                    `"${row.age}"`,
+                    `"${row.gender}"`,
+                    `"${row.designation}"`,
+                    `"${row.institution.replace(/"/g, '""')}"`,
+                    `"${row.food}"`,
+                    `"${row.category}"`,
+                    `"${row.paymentUniqueId}"`
+                ];
+                csvRows.push(values.join(','));
+            });
+            
+            const csvData = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+            const csvUrl = URL.createObjectURL(csvData);
+            const hiddenElement = document.createElement('a');
+            hiddenElement.href = csvUrl;
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'MALCON2026_Participants.csv';
+            hiddenElement.click();
+            showToast("CSV Downloaded", "success");
+        }
+
         function refreshAdminDashboard() {
             const regs = state.registrations;
+            const flatParticipants = getFlattenedParticipants();
             
-            const total = regs.length;
+            const total = flatParticipants.length; 
             const pending = regs.filter(r => r.status === 'Pending').length;
             const approved = regs.filter(r => r.status === 'Approved').length;
-            const veg = regs.filter(r => r.food === 'Veg').length;
-            const nonVeg = regs.filter(r => r.food === 'Non Veg').length;
+            const veg = flatParticipants.filter(r => r.food === 'Veg').length;
+            const nonVeg = flatParticipants.filter(r => r.food === 'Non Veg').length;
             
             let revenue = 0;
             regs.filter(r => r.status === 'Approved').forEach(r => {
@@ -1497,42 +1658,44 @@
             const tbody = document.getElementById('admin-table-body');
             tbody.innerHTML = '';
 
-            if (regs.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-500">No registrations found.</td></tr>`;
+            if (flatParticipants.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-500">No participants found.</td></tr>`;
                 return;
             }
 
-            regs.forEach(reg => {
-                const date = new Date(reg.timestamp).toLocaleDateString('en-GB');
-                
+            flatParticipants.forEach(p => {
                 let statusBadge = '';
-                if(reg.status === 'Pending') statusBadge = `<span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-bold">PENDING</span>`;
-                if(reg.status === 'Approved') statusBadge = `<span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">APPROVED</span>`;
-                if(reg.status === 'Rejected') statusBadge = `<span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold">REJECTED</span>`;
+                if(p.status === 'Pending') statusBadge = `<span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-bold">PENDING</span>`;
+                if(p.status === 'Approved') statusBadge = `<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold">APPROVED</span>`;
+                if(p.status === 'Rejected') statusBadge = `<span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold">REJECTED</span>`;
 
-                const actionBtns = reg.status === 'Pending' ? `
-                    <button onclick="approveReg('${reg.id}')" class="w-8 h-8 rounded-full bg-green-100 text-green-600 hover:bg-green-200 ml-1" title="Approve"><i class="fas fa-check"></i></button>
-                    <button onclick="openRejectModal('${reg.id}')" class="w-8 h-8 rounded-full bg-red-100 text-red-600 hover:bg-red-200 ml-1" title="Reject"><i class="fas fa-times"></i></button>
-                ` : `<span class="text-xs text-gray-400">Locked</span>`;
+                const isPrimary = !p.regId.includes('-');
+                const actionBtns = (p.status === 'Pending' && isPrimary) ? `
+                    <button onclick="approveReg('${p.regId}')" class="w-8 h-8 rounded-full bg-green-100 text-green-600 hover:bg-green-200 ml-1" title="Approve Order"><i class="fas fa-check"></i></button>
+                    <button onclick="openRejectModal('${p.regId}')" class="w-8 h-8 rounded-full bg-red-100 text-red-600 hover:bg-red-200 ml-1" title="Reject Order"><i class="fas fa-times"></i></button>
+                ` : `<span class="text-[10px] text-gray-400">Linked to Primary</span>`;
 
                 const row = document.createElement('tr');
                 row.className = 'hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors';
                 row.innerHTML = `
                     <td class="p-4 align-top">
-                        <div class="font-bold text-primary dark:text-blue-400 text-xs">${reg.id}</div>
-                        <div class="text-xs text-gray-500">${date}</div>
+                        <div class="font-bold text-primary dark:text-blue-400 text-xs">${p.regId}</div>
+                        <div class="text-xs text-gray-500">${p.date}</div>
                     </td>
                     <td class="p-4 align-top">
-                        <div class="font-bold text-gray-900 dark:text-white">${reg.name}</div>
-                        <div class="text-xs text-gray-500">${reg.email} • ${reg.phone}</div>
-                        <div class="text-[10px] uppercase text-gray-400 mt-1">${reg.institution}</div>
+                        <div class="font-bold text-gray-900 dark:text-white">${p.name}</div>
+                        <div class="text-xs text-gray-500">${p.email} • ${p.phone}</div>
+                        <div class="text-[10px] uppercase text-gray-400 mt-1">${p.institution}</div>
                     </td>
                     <td class="p-4 align-top">
-                        <div class="font-medium text-gray-800 dark:text-gray-200">${reg.category}</div>
-                        <div class="text-xs text-gray-500">${reg.amount} • ${reg.food}</div>
+                        <div class="font-medium text-gray-800 dark:text-gray-200">${p.category}</div>
+                        <div class="text-[10px] font-bold text-accent uppercase mt-1">${p.role}</div>
                     </td>
-                    <td class="p-4 text-center align-top">
-                        <button class="text-blue-500 hover:text-blue-700" title="View Docs"><i class="fas fa-file-invoice"></i></button>
+                    <td class="p-4 align-top font-semibold text-primary dark:text-blue-400 font-mono text-xs">
+                        ${p.paymentUniqueId}
+                    </td>
+                    <td class="p-4 align-top text-xs font-medium ${p.food==='Veg'?'text-green-600':'text-red-600'}">
+                        ${p.food}
                     </td>
                     <td class="p-4 text-center align-top">
                         ${statusBadge}
@@ -1550,7 +1713,7 @@
             if (index > -1) {
                 state.registrations[index].status = 'Approved';
                 localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
-                showToast(`Registration ${id} Approved. Email sent.`, "success");
+                showToast("Order Approved Successfully.", "success");
                 refreshAdminDashboard();
             }
         }
@@ -1577,7 +1740,7 @@
                 state.registrations[index].status = 'Rejected';
                 state.registrations[index].rejectReason = reason;
                 localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
-                showToast(`Registration ${id} Rejected.`, "info");
+                showToast("Order Rejected.", "info");
                 closeRejectModal();
                 refreshAdminDashboard();
             }
@@ -1585,226 +1748,155 @@
 
         function seedMockData() {
             const mocks = [
-                { id: generateID(), timestamp: new Date(Date.now() - 86400000).toISOString(), status: 'Pending', name: 'Dr. John Doe', email: 'john@example.com', phone: '9876543210', institution: 'Malla Reddy Univ', category: 'Solo - Professional', amount: '₹2,500', food: 'Veg', entryDone: false, foodDone: false },
-                { id: generateID(), timestamp: new Date(Date.now() - 186400000).toISOString(), status: 'Approved', name: 'Jane Smith', email: 'jane@example.com', phone: '9123456780', institution: 'Osmania Univ', category: 'Solo - Student', amount: '₹2,500', food: 'Non Veg', entryDone: false, foodDone: false }
+                { id: generateID(), timestamp: new Date(Date.now() - 86400000).toISOString(), status: 'Pending', name: 'Dr. John Doe', email: 'john@example.com', phone: '9876543210', age: '35', gender: 'Male', designation: 'Professional', institution: 'Malla Reddy Univ', category: 'Solo - Professional', amount: '₹2,500', food: 'Veg', entryDone: false, foodDone: false, paymentUniqueId: 'PAY-MAL-H6Y7S2', teamMembers: [] },
+                { id: generateID(), timestamp: new Date(Date.now() - 186400000).toISOString(), status: 'Approved', name: 'Jane Smith', email: 'jane@example.com', phone: '9123456780', age: '22', gender: 'Female', designation: 'UG Student', institution: 'Osmania Univ', category: 'Solo - Student', amount: '₹2,500', food: 'Non Veg', entryDone: false, foodDone: false, paymentUniqueId: 'PAY-MAL-X2D9W4', teamMembers: [] }
             ];
             state.registrations = [...mocks, ...state.registrations];
             localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
-            refreshAdminDashboard();
-            showToast("Mock data injected.", "success");
+            if(state.currentView === 'admin' && state.adminAuthenticated) refreshAdminDashboard();
         }
 
-        function showEmailTemplates() {
-            document.getElementById('email-modal').classList.remove('hidden');
-            document.getElementById('email-modal').classList.add('flex');
-        }
-
-        async function testMakeWebhook() {
-            if (!WEBHOOK_URL.includes('make.com')) {
-                showToast("Please set a valid Make.com webhook URL first.", "error");
-                return;
-            }
-            
-            showToast("Sending test data to Make.com...", "info");
-            
-            const dummyImageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="; 
-            
-            const basePayload = {
-                timestamp: new Date().toISOString(),
-                status: 'Pending',
-                age: "28",
-                gender: "Male",
-                phone: "9876543210",
-                affiliation: "Dept of Physiotherapy",
-                idProofMock: "test_id.png",
-                paymentMock: "test_payment.png",
-                entryDone: false,
-                foodDone: false,
-                idCard: { filename: "test_id.png", mimeType: "image/png", data: dummyImageBase64 },
-                paymentScreenshot: { filename: "test_payment.png", mimeType: "image/png", data: dummyImageBase64 }
-            };
-
-            const payloads = [
-                {
-                    ...basePayload,
-                    id: "MAL-TEST-1",
-                    name: "Alice (Solo Student)",
-                    email: "alice@student.edu",
-                    designation: "PG Student",
-                    institution: "Malla Reddy University",
-                    food: "Veg",
-                    category: "Solo - Student",
-                    amount: "₹2,500",
-                    teamMembers: []
-                },
-                {
-                    ...basePayload,
-                    id: "MAL-TEST-2",
-                    name: "Dr. Bob (Solo Pro)",
-                    email: "bob@clinic.com",
-                    designation: "Professional",
-                    institution: "City Hospital",
-                    food: "Non Veg",
-                    category: "Solo - Professional",
-                    amount: "₹2,500",
-                    teamMembers: []
-                },
-                {
-                    ...basePayload,
-                    id: "MAL-TEST-3",
-                    name: "Charlie (Team 25 Lead)",
-                    email: "charlie@team25.com",
-                    designation: "Faculty",
-                    institution: "Osmania University",
-                    food: "Veg",
-                    category: "Team of 25",
-                    amount: "₹56,250",
-                    teamMembers: Array.from({length: 24}, (_, i) => ({
-                        name: `Team Member ${i+2}`,
-                        email: `member${i+2}@team25.com`,
-                        phone: "9876543210",
-                        age: "22",
-                        gender: "Female",
-                        designation: "UG Student",
-                        institution: "Osmania University",
-                        food: i % 2 === 0 ? "Veg" : "Non Veg",
-                        idCardFilename: "member_id.png"
-                    }))
-                },
-                {
-                    ...basePayload,
-                    id: "MAL-TEST-4",
-                    name: "Diana (Team 50 Lead)",
-                    email: "diana@team50.com",
-                    designation: "Academician",
-                    institution: "NIMS",
-                    food: "Non Veg",
-                    category: "Team of 50",
-                    amount: "₹100,000",
-                    teamMembers: Array.from({length: 49}, (_, i) => ({
-                        name: `Team Member ${i+2}`,
-                        email: `member${i+2}@team50.com`,
-                        phone: "9876543210",
-                        age: "24",
-                        gender: "Male",
-                        designation: "PG Student",
-                        institution: "NIMS",
-                        food: i % 2 === 0 ? "Veg" : "Non Veg",
-                        idCardFilename: "member_id.png"
-                    }))
-                }
-            ];
-
+        // Live connection diagnostician directly to Google Web App
+        async function testAppsScriptConnection() {
+            showToast("Testing Google Connection...", "info");
             try {
-                for (const p of payloads) {
-                    await fetch(WEBHOOK_URL, { 
-                        method: 'POST', 
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(p) 
-                    });
-                    await new Promise(r => setTimeout(r, 700)); 
+                const response = await fetch(GOOGLE_DRIVE_UPLOAD_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ testMode: true })
+                });
+                const result = await response.json();
+                if (result && result.status === "success") {
+                    showToast("Google Apps Script Connection Active!", "success");
+                } else {
+                    showToast("Encountered unexpected response schema.", "error");
                 }
-                showToast("Test payloads sent! Check Make.com Scenario.", "success");
-            } catch (e) {
-                console.error(e);
-                showToast("Error sending webhook. Check console.", "error");
+            } catch (err) {
+                console.error(err);
+                showToast("Connection failed. Check Web App URL deployment.", "error");
             }
         }
 
-        // --- CHECK-IN LOGIC ---
+        // --- CHECK-IN KIOSK SIMULATION ENGINE ---
         function simulateScan(type) {
             const resultCard = document.getElementById('scan-result');
             resultCard.classList.add('hidden');
             
             setTimeout(() => {
                 if (type === 'valid') {
-                    let user = state.registrations.find(r => r.status === 'Approved');
+                    let flat = getFlattenedParticipants();
+                    let user = flat.find(r => r.status === 'Approved');
+                    if(!user && flat.length > 0) {
+                        user = flat[Math.floor(Math.random() * flat.length)];
+                    }
                     if(!user) {
-                        user = { id: 'MAL-99887', name: 'Dr. Sarah Connor', category: 'Professional', food: 'Veg', status: 'Approved', entryDone: false, foodDone: false };
+                        user = { regId: 'MAL-99887', role: 'Primary', name: 'Dr. Sarah Connor', category: 'Solo - Professional', food: 'Veg', status: 'Approved', entryDone: false, foodDone: false, date: '03/08/2026', institution: 'Malla Reddy Univ' };
                     }
-                    
                     state.checkinData = user; 
-
-                    document.getElementById('scan-initial').innerText = user.name.charAt(0);
-                    document.getElementById('scan-name').innerText = user.name;
-                    document.getElementById('scan-id').innerText = `ID: ${user.id}`;
-                    document.getElementById('scan-category').innerText = user.category;
-                    document.getElementById('scan-food').innerText = user.food;
-                    
-                    document.getElementById('scan-status').innerText = 'VALID PASS';
-                    document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded';
-
-                    const btnEntry = document.getElementById('btn-mark-entry');
-                    const btnFood = document.getElementById('btn-mark-food');
-                    
-                    if(user.entryDone) {
-                        btnEntry.disabled = true;
-                        btnEntry.innerHTML = '<i class="fas fa-check"></i> Entered';
-                        btnEntry.classList.replace('bg-primary', 'bg-gray-400');
-                    } else {
-                        btnEntry.disabled = false;
-                        btnEntry.innerHTML = '<i class="fas fa-sign-in-alt mr-1"></i> Entry';
-                        btnEntry.className = 'flex-1 py-2 rounded-lg bg-primary hover:bg-secondary text-white font-semibold text-sm transition-colors';
-                    }
-
-                    if(user.foodDone) {
-                        btnFood.disabled = true;
-                        btnFood.innerHTML = '<i class="fas fa-check"></i> Collected';
-                        btnFood.classList.replace('bg-accent', 'bg-gray-400');
-                    } else {
-                        btnFood.disabled = false;
-                        btnFood.innerHTML = '<i class="fas fa-utensils mr-1"></i> Food';
-                        btnFood.className = 'flex-1 py-2 rounded-lg bg-accent hover:bg-orange-500 text-white font-semibold text-sm transition-colors';
-                    }
-
+                    renderScanResults(user);
                     resultCard.classList.remove('hidden');
                     showToast("Scan Successful", "success");
                 } else {
-                    document.getElementById('scan-initial').innerText = '?';
-                    document.getElementById('scan-name').innerText = 'Unknown QR / Not Found';
-                    document.getElementById('scan-id').innerText = 'ID: INVALID';
-                    document.getElementById('scan-category').innerText = '-';
-                    document.getElementById('scan-food').innerText = '-';
-                    
-                    document.getElementById('scan-status').innerText = 'INVALID';
-                    document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded';
-                    
-                    document.getElementById('btn-mark-entry').disabled = true;
-                    document.getElementById('btn-mark-entry').className = 'flex-1 py-2 rounded-lg bg-gray-300 text-gray-500 font-semibold text-sm cursor-not-allowed';
-                    document.getElementById('btn-mark-food').disabled = true;
-                    document.getElementById('btn-mark-food').className = 'flex-1 py-2 rounded-lg bg-gray-300 text-gray-500 font-semibold text-sm cursor-not-allowed';
-
+                    renderInvalidScan();
                     resultCard.classList.remove('hidden');
                     showToast("Invalid QR Code", "error");
                 }
             }, 500);
         }
 
-        function markAction(action) {
-            if(!state.checkinData) return;
-            const user = state.checkinData;
+        function renderScanResults(user) {
+            document.getElementById('scan-initial').innerText = user.name.charAt(0);
+            document.getElementById('scan-name').innerText = user.name;
+            document.getElementById('scan-id').innerText = `ID: ${user.regId}`;
+            document.getElementById('scan-category').innerText = user.category;
+            document.getElementById('scan-food').innerText = user.food;
             
-            if(action === 'entry' && !user.entryDone) {
-                user.entryDone = true;
-                const btn = document.getElementById('btn-mark-entry');
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-check"></i> Entered';
-                btn.classList.replace('bg-primary', 'bg-gray-400');
-                showToast("Entry Marked Successfully", "success");
-            }
-            else if(action === 'food' && !user.foodDone) {
-                user.foodDone = true;
-                const btn = document.getElementById('btn-mark-food');
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-check"></i> Collected';
-                btn.classList.replace('bg-accent', 'bg-gray-400');
-                showToast("Food Marked as Collected", "success");
+            document.getElementById('scan-status').innerText = user.status.toUpperCase() + ' PASS';
+            
+            if (user.status === 'Approved') {
+                document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded';
+            } else if (user.status === 'Rejected') {
+                document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded';
+            } else {
+                document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded';
             }
 
-            const index = state.registrations.findIndex(r => r.id === user.id);
+            const btnEntry = document.getElementById('btn-mark-entry');
+            const btnFood = document.getElementById('btn-mark-food');
+            
+            if (user.status !== 'Approved') {
+                btnEntry.disabled = true;
+                btnEntry.className = 'flex-1 py-2 rounded-lg bg-gray-300 text-gray-500 font-semibold text-sm cursor-not-allowed';
+                btnFood.disabled = true;
+                btnFood.className = 'flex-1 py-2 rounded-lg bg-gray-300 text-gray-500 font-semibold text-sm cursor-not-allowed';
+                return;
+            }
+
+            if(user.entryDone) {
+                btnEntry.disabled = true;
+                btnEntry.innerHTML = '<i class="fas fa-check"></i> Entered';
+                btnEntry.className = 'flex-1 py-2 rounded-lg bg-gray-400 text-white font-semibold text-sm transition-colors cursor-not-allowed';
+            } else {
+                btnEntry.disabled = false;
+                btnEntry.innerHTML = '<i class="fas fa-sign-in-alt mr-1"></i> Entry';
+                btnEntry.className = 'flex-1 py-2 rounded-lg bg-primary hover:bg-secondary text-white font-semibold text-sm transition-colors';
+            }
+
+            if(user.foodDone) {
+                btnFood.disabled = true;
+                btnFood.innerHTML = '<i class="fas fa-check"></i> Collected';
+                btnFood.className = 'flex-1 py-2 rounded-lg bg-gray-400 text-white font-semibold text-sm transition-colors cursor-not-allowed';
+            } else {
+                btnFood.disabled = false;
+                btnFood.innerHTML = '<i class="fas fa-utensils mr-1"></i> Food';
+                btnFood.className = 'flex-1 py-2 rounded-lg bg-accent hover:bg-orange-500 text-white font-semibold text-sm transition-colors';
+            }
+        }
+
+        function renderInvalidScan() {
+            document.getElementById('scan-initial').innerText = '?';
+            document.getElementById('scan-name').innerText = 'Unknown QR / Not Found';
+            document.getElementById('scan-id').innerText = 'ID: INVALID';
+            document.getElementById('scan-category').innerText = '-';
+            document.getElementById('scan-food').innerText = '-';
+            
+            document.getElementById('scan-status').innerText = 'INVALID';
+            document.getElementById('scan-status').className = 'ml-auto px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded';
+            
+            document.getElementById('btn-mark-entry').disabled = true;
+            document.getElementById('btn-mark-entry').className = 'flex-1 py-2 rounded-lg bg-gray-300 text-gray-500 font-semibold text-sm cursor-not-allowed';
+            document.getElementById('btn-mark-food').disabled = true;
+            document.getElementById('btn-mark-food').className = 'flex-1 py-2 rounded-lg bg-gray-300 text-gray-500 font-semibold text-sm cursor-not-allowed';
+        }
+
+        function markAction(action) {
+            if(!state.checkinData) return;
+            const targetId = state.checkinData.regId;
+            const parts = targetId.split('-');
+            const parentId = parts[0];
+            const memberIndex = parts[1] ? parseInt(parts[1]) - 2 : null;
+
+            const index = state.registrations.findIndex(r => r.id === parentId);
             if(index > -1) {
-                state.registrations[index] = user;
+                if (memberIndex === null) {
+                    // Primary Registrant logic update
+                    if(action === 'entry') state.registrations[index].entryDone = true;
+                    if(action === 'food') state.registrations[index].foodDone = true;
+                } else {
+                    // Team Member parameters update
+                    if(action === 'entry') state.registrations[index].teamMembers[memberIndex].entryDone = true;
+                    if(action === 'food') state.registrations[index].teamMembers[memberIndex].foodDone = true;
+                }
+                
                 localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
+                
+                // Update active working state
+                state.checkinData.entryDone = (action === 'entry') ? true : state.checkinData.entryDone;
+                state.checkinData.foodDone = (action === 'food') ? true : state.checkinData.foodDone;
+                
+                // Re-render checkin card interface elements
+                renderScanResults(state.checkinData);
+                showToast("Action marked successfully.", "success");
             }
         }
     </script>
