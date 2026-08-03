@@ -157,11 +157,11 @@
             transform: translateX(0);
         }
         
-        /* Loader */
+        /* Video Loader overlay */
         .loader-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(255,255,255,0.9);
+            background: #F7F9FC; 
             z-index: 10000;
             display: flex;
             flex-direction: column;
@@ -170,17 +170,15 @@
             transition: opacity 0.5s;
         }
         .dark .loader-overlay {
-            background: rgba(15,23,42,0.9);
+            background: #0F172A;
         }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--secondary);
-            border-top: 4px solid var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        #loader-video {
+            width: 100%;
+            max-width: 800px;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* View Management */
         .app-view {
@@ -221,14 +219,22 @@
                 font-size: 0.875rem;
             }
         }
+        
+        /* Specific utility for our team member panel to not hide content ungracefully */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 20px; }
     </style>
 </head>
+<!-- Default strictly to light mode (white) until manually toggled -->
 <body class="antialiased transition-colors duration-300">
 
+    <!-- Video Loader Overlay -->
     <div id="global-loader" class="loader-overlay">
-        <div class="spinner mb-4"></div>
-        <h2 class="font-heading text-xl font-bold text-primary dark:text-white">FESTORA</h2>
-        <p class="text-sm text-gray-500">Initializing Platform...</p>
+        <!-- Video automatically plays (muted required for autoplay policies) -->
+        <video id="loader-video" autoplay muted playsinline>
+            <source src="WhatsApp Video 2026-08-03 at 10.43.58 AM.mp4" type="video/mp4">
+        </video>
     </div>
 
     <!-- Toast Container -->
@@ -236,9 +242,9 @@
 
     <header class="fixed w-full z-50 transition-all duration-300" id="main-nav">
         <div class="glass mx-auto max-w-7xl mt-4 rounded-full px-6 py-3 flex justify-between items-center shadow-sm">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('landing')">
-                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-heading font-bold text-xl">
-                    M
+            <div class="flex items-center gap-3 cursor-pointer" onclick="state.currentView !== 'landing' ? navigateTo('landing') : null">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden">
+                    <img src="LOGO_Malcon.png" alt="Logo" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h1 class="font-heading font-bold text-lg leading-tight text-primary dark:text-white">MALCON '26</h1>
@@ -294,7 +300,6 @@
             <!-- Hero Section -->
             <section class="relative pt-12 pb-20 lg:pt-24 lg:pb-32 overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <!-- Abstract Background Pattern -->
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800 opacity-90"></div>
                     <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-400/10 blur-3xl"></div>
                     <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[30rem] h-[30rem] rounded-full bg-accent/10 blur-3xl"></div>
@@ -336,24 +341,24 @@
                     </div>
 
                     <!-- Countdown Timer Glass Card -->
-                    <div class="reveal glass rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl border border-white/40 dark:border-gray-700/50 relative">
+                    <div class="reveal glass rounded-3xl p-4 sm:p-6 lg:p-10 shadow-xl border border-white/40 dark:border-gray-700/50 relative">
                         <div class="absolute -top-6 -right-6 w-24 h-24 bg-accent rounded-full blur-2xl opacity-50 z-0"></div>
-                        <h3 class="font-heading text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center z-10 relative dark:text-white">Conference Starts In</h3>
+                        <h3 class="font-heading text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-center z-10 relative dark:text-white">Conference Starts In</h3>
                         <div class="grid grid-cols-4 gap-2 sm:gap-4 z-10 relative">
                             <div class="text-center">
-                                <div id="cd-days" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
+                                <div id="cd-days" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
                                 <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Days</div>
                             </div>
                             <div class="text-center">
-                                <div id="cd-hours" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
+                                <div id="cd-hours" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
                                 <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Hours</div>
                             </div>
                             <div class="text-center">
-                                <div id="cd-minutes" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
+                                <div id="cd-minutes" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary dark:text-blue-400 font-heading">00</div>
                                 <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Mins</div>
                             </div>
                             <div class="text-center">
-                                <div id="cd-seconds" class="text-2xl sm:text-4xl lg:text-5xl font-bold text-accent font-heading">00</div>
+                                <div id="cd-seconds" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent font-heading">00</div>
                                 <div class="text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider text-gray-500 mt-1 sm:mt-2 font-semibold">Secs</div>
                             </div>
                         </div>
@@ -371,7 +376,6 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <!-- Highlight Cards -->
                         <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-2xl text-center shadow-sm hover:shadow-md transition-shadow reveal border border-gray-100 dark:border-slate-700">
                             <div class="w-16 h-16 mx-auto bg-blue-100 dark:bg-blue-900/50 text-primary dark:text-blue-300 rounded-full flex items-center justify-center text-2xl mb-4">
                                 <i class="fas fa-globe"></i>
@@ -408,7 +412,7 @@
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                         <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4 text-gray-900 dark:text-white">Registration Fees</h2>
-                        <p class="text-gray-600 dark:text-gray-300">Choose the category that applies to you. Early bird discounts available till 31st May 2026.</p>
+                        <p class="text-gray-600 dark:text-gray-300">Choose the category that applies to you. On-Spot registrations available directly at the venue.</p>
                     </div>
 
                     <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -418,8 +422,12 @@
                             <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">For undergraduate and postgraduate students.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Regular</span>
-                                    <span class="font-bold text-gray-900 dark:text-white">₹1,500</span>
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Regular Phase</span>
+                                    <span class="font-bold text-gray-900 dark:text-white">₹2,500</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">On-Spot <span class="text-[10px] font-normal text-gray-400">(Aug 21-22)</span></span>
+                                    <span class="font-bold text-gray-900 dark:text-white">₹3,500</span>
                                 </div>
                             </div>
                             <button onclick="navigateTo('register')" class="w-full py-3 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-colors font-bold">Register as Student</button>
@@ -432,8 +440,12 @@
                             <p class="text-sm text-blue-200 mb-6">For physiotherapists, clinicians, and researchers.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-blue-700 pb-2">
-                                    <span class="text-blue-100 text-sm">Regular</span>
+                                    <span class="text-blue-100 text-sm">Regular Phase</span>
                                     <span class="font-bold text-white">₹2,500</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-blue-700 pb-2">
+                                    <span class="text-blue-100 text-sm">On-Spot <span class="text-[10px] font-normal opacity-80">(Aug 21-22)</span></span>
+                                    <span class="font-bold text-white">₹3,500</span>
                                 </div>
                             </div>
                             <button onclick="navigateTo('register')" class="w-full py-3 rounded-full bg-accent hover:bg-orange-500 text-white transition-colors font-bold shadow-md">Register as Professional</button>
@@ -445,12 +457,16 @@
                             <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Register a large team directly.</p>
                             <div class="space-y-4 mb-8">
                                 <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Team of 25 (Total)</span>
-                                    <span class="font-bold text-gray-900 dark:text-white">₹2,200</span>
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Team of 25</span>
+                                    <span class="font-bold text-gray-900 dark:text-white">₹2,250 <span class="text-xs font-normal">/person</span></span>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
-                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Team of 50 (Total)</span>
-                                    <span class="font-bold text-gray-900 dark:text-white">₹2,000</span>
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">Team of 50</span>
+                                    <span class="font-bold text-gray-900 dark:text-white">₹2,000 <span class="text-xs font-normal">/person</span></span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-100 dark:border-slate-700 pb-2">
+                                    <span class="text-gray-600 dark:text-gray-300 text-sm">On-Spot <span class="text-[10px] font-normal text-gray-400">(Aug 21-22)</span></span>
+                                    <span class="font-bold text-gray-900 dark:text-white">₹3,500 <span class="text-xs font-normal">/person</span></span>
                                 </div>
                             </div>
                             <button onclick="navigateTo('register')" class="w-full py-3 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-colors font-bold">Register as Group</button>
@@ -483,19 +499,37 @@
                             <div class="step-marker w-10 h-10 rounded-full flex items-center justify-center font-bold z-10 bg-white dark:bg-slate-700 border-2 border-gray-200 dark:border-slate-600 text-gray-400" id="marker-4">4</div>
                             <div class="step-marker w-10 h-10 rounded-full flex items-center justify-center font-bold z-10 bg-white dark:bg-slate-700 border-2 border-gray-200 dark:border-slate-600 text-gray-400" id="marker-5">5</div>
                         </div>
-                        <div class="text-center mt-4 text-sm font-semibold text-primary dark:text-blue-400" id="step-title">Personal Details</div>
+                        <div class="text-center mt-4 text-sm font-semibold text-primary dark:text-blue-400" id="step-title">Registration Category</div>
                     </div>
 
                     <!-- Form Container -->
                     <div class="p-8 lg:p-12">
                         <form id="registration-form" onsubmit="event.preventDefault();">
                             
-                            <!-- Step 1: Personal Details -->
+                            <!-- Step 1: Category -->
                             <div class="form-step" id="step-1">
+                                <div class="max-w-md mx-auto">
+                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4 text-center">Select Your Registration Category *</label>
+                                    <select id="reg-category" required class="input-field mb-6 text-lg py-3" onchange="handleCategoryChange()">
+                                        <option value="">-- Choose Category --</option>
+                                        <option value="Solo - Student">Solo - Student (₹2,500)</option>
+                                        <option value="Solo - Professional">Solo - Professional (₹2,500)</option>
+                                        <option value="Team of 25">Group - Team of 25 (₹2,250 per participant)</option>
+                                        <option value="Team of 50">Group - Team of 50 (₹2,000 per participant)</option>
+                                    </select>
+                                    <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-sm text-blue-800 dark:text-blue-300">
+                                        <i class="fas fa-info-circle mr-2"></i> For group registrations, you will need to provide the individual details for all team members in Step 4. Pricing automatically switches to On-Spot on August 21st.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Personal Details (Primary) -->
+                            <div class="form-step hidden" id="step-2">
+                                <h3 class="font-bold text-lg mb-4 dark:text-white border-b border-gray-100 dark:border-slate-700 pb-2">Primary Registrant Details</h3>
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div class="md:col-span-2">
-                                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Full Name (Primary Registrant) *</label>
-                                        <input type="text" id="reg-name" required class="input-field" placeholder="Enter your full name as required on certificate">
+                                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Full Name *</label>
+                                        <input type="text" id="reg-name" required class="input-field" placeholder="Enter full name as required on certificate">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Age *</label>
@@ -521,9 +555,9 @@
                                 </div>
                             </div>
 
-                            <!-- Step 2: Professional Information -->
-                            <div class="form-step hidden" id="step-2">
-                                <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Step 3: Professional Info & Food (Primary) -->
+                            <div class="form-step hidden" id="step-3">
+                                <div class="grid md:grid-cols-2 gap-6 mb-8">
                                     <div class="md:col-span-2">
                                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Designation *</label>
                                         <select id="reg-designation" required class="input-field">
@@ -547,101 +581,65 @@
                                         <input type="text" id="reg-affiliation" class="input-field" placeholder="Department, Council Registration No., etc.">
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Step 3: Food Preference -->
-                            <div class="form-step hidden" id="step-3">
-                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Select Food Preference *</label>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <label class="cursor-pointer">
-                                        <input type="radio" name="food" value="Veg" required class="peer sr-only">
-                                        <div class="rounded-xl border-2 border-gray-200 dark:border-slate-700 p-6 text-center peer-checked:border-green-500 peer-checked:bg-green-50 dark:peer-checked:bg-green-900/20 transition-all">
-                                            <div class="w-4 h-4 rounded-sm border-2 border-green-600 flex items-center justify-center mx-auto mb-3">
-                                                <div class="w-2 h-2 rounded-full bg-green-600"></div>
+                                <div class="border-t border-gray-100 dark:border-slate-700 pt-6">
+                                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Food Preference (Primary Registrant) *</label>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="food" value="Veg" required class="peer sr-only">
+                                            <div class="rounded-xl border-2 border-gray-200 dark:border-slate-700 p-4 text-center peer-checked:border-green-500 peer-checked:bg-green-50 dark:peer-checked:bg-green-900/20 transition-all">
+                                                <div class="font-bold text-gray-800 dark:text-white">Vegetarian</div>
                                             </div>
-                                            <div class="font-bold text-gray-800 dark:text-white">Vegetarian</div>
-                                        </div>
-                                    </label>
-                                    <label class="cursor-pointer">
-                                        <input type="radio" name="food" value="Non Veg" class="peer sr-only">
-                                        <div class="rounded-xl border-2 border-gray-200 dark:border-slate-700 p-6 text-center peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/20 transition-all">
-                                            <div class="w-4 h-4 rounded-sm border-2 border-red-600 flex items-center justify-center mx-auto mb-3">
-                                                <div class="w-2 h-2 rounded-full bg-red-600"></div>
+                                        </label>
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="food" value="Non Veg" class="peer sr-only">
+                                            <div class="rounded-xl border-2 border-gray-200 dark:border-slate-700 p-4 text-center peer-checked:border-red-500 peer-checked:bg-red-50 dark:peer-checked:bg-red-900/20 transition-all">
+                                                <div class="font-bold text-gray-800 dark:text-white">Non-Vegetarian</div>
                                             </div>
-                                            <div class="font-bold text-gray-800 dark:text-white">Non-Vegetarian</div>
-                                        </div>
-                                    </label>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Step 4: Documents Upload -->
+                            <!-- Step 4: Documents & Team Details -->
                             <div class="form-step hidden" id="step-4">
-                                <div class="mb-6">
+                                <div class="mb-8 bg-gray-50 dark:bg-slate-800/50 p-6 rounded-xl border border-gray-200 dark:border-slate-700">
                                     <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Upload ID Card (Primary Registrant) *</label>
-                                    <p class="text-xs text-gray-500 mb-4">College ID, Employee ID, or Aadhar. Allowed: JPG, PNG, PDF. Max: 10MB.</p>
+                                    <p class="text-xs text-gray-500 mb-4">College ID, Employee ID, or Aadhar. Max 10MB.</p>
                                     
-                                    <div class="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-8 text-center bg-gray-50 dark:bg-slate-800/50 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors relative cursor-pointer" onclick="document.getElementById('reg-id-upload').click()">
+                                    <div class="border-2 border-dashed border-gray-300 dark:border-slate-500 rounded-xl p-6 text-center bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors cursor-pointer" onclick="document.getElementById('reg-id-upload').click()">
                                         <input type="file" id="reg-id-upload" accept=".jpg,.jpeg,.png,.pdf" required class="hidden" onchange="handleFileUpload(this, 'id-preview')">
-                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
-                                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Click to upload or drag and drop</p>
+                                        <i class="fas fa-id-card text-3xl text-gray-400 mb-2"></i>
+                                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Click to upload ID Card</p>
                                         <p id="id-preview" class="text-xs text-primary dark:text-blue-400 font-semibold mt-2 hidden"></p>
                                     </div>
                                 </div>
+
+                                <!-- Dynamic Team Members Container -->
+                                <div id="team-members-container" class="hidden space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                                    <!-- Injected via JavaScript based on Category -->
+                                </div>
                             </div>
 
-                            <!-- Step 5: Category & Payment -->
+                            <!-- Step 5: Payment Summary -->
                             <div class="form-step hidden" id="step-5">
                                 <div class="grid md:grid-cols-2 gap-8">
-                                    <!-- Selection & Summary -->
-                                    <div>
-                                        <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Registration Category *</label>
-                                        <select id="reg-category" required class="input-field mb-6" onchange="handleCategoryChange()">
-                                            <option value="">Select Category</option>
-                                            <option value="Solo - Student">Solo - Student</option>
-                                            <option value="Solo - Professional">Solo - Professional</option>
-                                            <option value="Team of 25">Group - Team of 25</option>
-                                            <option value="Team of 50">Group - Team of 50</option>
-                                        </select>
-
-                                        <!-- Dynamic Team Members Container -->
-                                        <div id="team-members-container" class="hidden mb-6 space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-                                            <!-- Injected via JavaScript -->
-                                        </div>
-
-                                        <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700">
-                                            <h4 class="font-heading font-bold text-gray-800 dark:text-white mb-4 border-b border-gray-200 dark:border-slate-600 pb-2">Registration Summary</h4>
-                                            <div class="flex justify-between items-center mb-2 text-sm text-gray-600 dark:text-gray-300">
-                                                <span>Base Fee:</span>
-                                                <span id="summary-base">₹0</span>
-                                            </div>
-                                            <div class="flex justify-between items-center mb-4 text-sm text-green-600 font-medium">
-                                                <span>Phase Applied:</span>
-                                                <span id="summary-phase">Regular</span>
-                                            </div>
-                                            <div class="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-slate-600">
-                                                <span class="font-bold text-gray-800 dark:text-white">Total Amount:</span>
-                                                <span id="summary-total" class="font-bold text-xl text-primary dark:text-blue-400">₹0</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <!-- Payment Instructions -->
-                                    <div>
+                                    <div class="order-2 md:order-1">
                                         <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 mb-6">
-                                            <h4 class="font-heading font-bold text-primary dark:text-blue-300 mb-2"><i class="fas fa-university mr-2"></i>Payment Instructions</h4>
-                                            <p class="text-xs text-gray-600 dark:text-gray-400 mb-4">Please transfer the amount to the following bank account or scan the UPI QR code.</p>
+                                            <h4 class="font-heading font-bold text-primary dark:text-blue-300 mb-2"><i class="fas fa-university mr-2"></i>Bank Transfer Details</h4>
+                                            <p class="text-xs text-gray-600 dark:text-gray-400 mb-4">Please transfer the total amount shown to the following account or scan the QR code.</p>
                                             
                                             <div class="text-sm space-y-1 mb-4 font-medium text-gray-800 dark:text-gray-200">
-                                                <p><span class="text-gray-500">Bank:</span> State Bank of India</p>
-                                                <p><span class="text-gray-500">A/C Name:</span> MALCON 2026 MRU</p>
-                                                <p><span class="text-gray-500">A/C No:</span> 39876543210</p>
-                                                <p><span class="text-gray-500">IFSC:</span> SBIN0021345</p>
-                                                <p><span class="text-gray-500">UPI ID:</span> malcon26@sbi</p>
+                                                <p><span class="text-gray-500">Bank Name:</span> ICICI Bank Limited</p>
+                                                <p><span class="text-gray-500">A/C Name:</span> Malla Reddy University R and D Fund</p>
+                                                <p><span class="text-gray-500">A/C No:</span> 769401000133</p>
+                                                <p><span class="text-gray-500">IFSC:</span> ICIC0001807 (or ICIC007694)</p>
                                             </div>
                                             
-                                            <div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-lg w-max mx-auto">
-                                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=upi://pay?pa=malcon26@sbi&pn=MALCON&am=0&cu=INR" alt="UPI QR" class="w-16 h-16 opacity-70">
-                                                <div class="text-xs text-gray-500 text-center">Scan to Pay<br>(Placeholder)</div>
+                                            <div class="bg-white dark:bg-slate-800 p-2 rounded-lg w-full max-w-sm mx-auto border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                                                <!-- Directly linking the provided image file verbatim -->
+                                                <img src="payment_scanner.png" alt="ICICI UPI QR Code" class="w-full h-auto object-contain" onerror="this.src='https://placehold.co/400x300/0B3C6D/FFFFFF?text=QR+Code+Unavailable'">
                                             </div>
                                         </div>
 
@@ -653,6 +651,33 @@
                                                 <i class="fas fa-receipt text-2xl text-gray-400 mb-2"></i>
                                                 <p class="text-xs font-medium text-gray-700 dark:text-gray-300">Upload Screenshot (Max 10MB)</p>
                                                 <p id="payment-preview" class="text-xs text-green-600 font-semibold mt-1 hidden"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Summary -->
+                                    <div class="order-1 md:order-2">
+                                        <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 sticky top-6">
+                                            <h4 class="font-heading font-bold text-gray-800 dark:text-white mb-4 border-b border-gray-200 dark:border-slate-600 pb-2">Registration Summary</h4>
+                                            
+                                            <div class="flex justify-between items-center mb-2 text-sm text-gray-600 dark:text-gray-300">
+                                                <span>Category:</span>
+                                                <span id="summary-category" class="font-medium text-gray-900 dark:text-white">-</span>
+                                            </div>
+                                            
+                                            <div class="flex justify-between items-center mb-2 text-sm text-gray-600 dark:text-gray-300">
+                                                <span>Calculation:</span>
+                                                <span id="summary-calculation" class="font-medium">-</span>
+                                            </div>
+                                            
+                                            <div class="flex justify-between items-center mb-6 text-sm font-medium">
+                                                <span class="text-gray-600 dark:text-gray-300">Phase Applied:</span>
+                                                <span id="summary-phase" class="text-green-600">Regular Phase</span>
+                                            </div>
+                                            
+                                            <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-slate-600">
+                                                <span class="font-bold text-gray-800 dark:text-white">Total Amount to Pay:</span>
+                                                <span id="summary-total" class="font-bold text-2xl text-primary dark:text-blue-400">₹0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -705,7 +730,6 @@
         </section>
 
         <section id="view-admin" class="app-view hidden">
-            <!-- (Admin Dashboard UI remains identical) -->
             <div class="flex h-screen bg-gray-50 dark:bg-dark-bg -mt-24 pt-24 fixed w-full z-40 top-0 left-0">
                 <div class="w-64 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 hidden md:flex flex-col">
                     <div class="p-6">
@@ -730,9 +754,14 @@
                             <h2 class="text-2xl font-heading font-bold text-gray-900 dark:text-white">Dashboard</h2>
                             <p class="text-sm text-gray-500">Manage MALCON 2026 registrations.</p>
                         </div>
-                        <button onclick="seedMockData()" class="text-sm bg-gray-200 dark:bg-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-slate-600 transition">
-                            <i class="fas fa-magic mr-1"></i> Add Mock Data
-                        </button>
+                        <div class="flex gap-2">
+                            <button onclick="testMakeWebhook()" class="text-sm bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 px-4 py-2 rounded-lg font-medium hover:bg-blue-200 transition shadow-sm">
+                                <i class="fas fa-paper-plane mr-1"></i> Test Webhook
+                            </button>
+                            <button onclick="seedMockData()" class="text-sm bg-gray-200 dark:bg-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-slate-600 transition shadow-sm">
+                                <i class="fas fa-magic mr-1"></i> Add Mock Data
+                            </button>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -904,11 +933,6 @@
             </div>
             <style>
                 @keyframes scan { 0%, 100% { top: 10%; } 50% { top: 90%; } }
-                
-                /* Specific utility for our team member panel to not hide content ungracefully */
-                .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-                .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-                .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 20px; }
             </style>
         </section>
 
@@ -920,7 +944,7 @@
                 <div class="md:col-span-2">
                     <h2 class="text-2xl font-heading font-bold text-primary dark:text-white mb-4">MALCON 2026</h2>
                     <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-md mb-6">
-                        Festora is a professional conference registration and event management platform developed by 221B Labs. It streamlines conference registrations, payment verification workflows, participant management, QR-based check-ins, food tracking, and automated communication.
+                        Festora is a professional registration and event management platform developed by 221B Labs. It streamlines registrations, payment verification workflows, participant management, QR-based check-ins, food tracking, and automated communication.
                     </p>
                     <div class="flex gap-4">
                         <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition"><i class="fab fa-twitter"></i></a>
@@ -944,7 +968,7 @@
                     <h4 class="font-bold text-gray-900 dark:text-white mb-4 uppercase text-sm tracking-wider">Powered By</h4>
                     <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-xl border border-gray-100 dark:border-slate-700">
                         <div class="font-heading font-bold text-lg text-primary dark:text-white mb-1">FESTORA</div>
-                        <p class="text-xs text-gray-500 mb-3">A Conference Registration Platform</p>
+                        <p class="text-xs text-gray-500 mb-3">A Registration Platform</p>
                         <p class="text-[10px] text-gray-400 uppercase font-semibold mb-1">Developed & Managed by</p>
                         <p class="font-bold text-sm dark:text-gray-300">221B Labs</p>
                     </div>
@@ -963,7 +987,7 @@
 
     <script>
         // --- CONSTANTS & STATE ---
-        const WEBHOOK_URL = 'https://example.com/api/webhook'; 
+        const WEBHOOK_URL = 'https://hook.eu1.make.com/gxv1r5lsklwppjus3bzmsemekjr5p6z6'; 
         
         let state = {
             currentView: 'landing',
@@ -974,15 +998,6 @@
             checkinData: null
         };
 
-        // Updated Pricing Structure 
-        // 25 people total = 2200, 50 people total = 2000
-        const pricing = {
-            'Solo - Professional': 2500,
-            'Solo - Student': 1500,
-            'Team of 25': 2200,
-            'Team of 50': 2000
-        };
-
         // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
             const savedRegs = localStorage.getItem('festora_regs');
@@ -991,14 +1006,28 @@
             }
             initCountdown();
 
-            setTimeout(() => {
-                const loader = document.getElementById('global-loader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
+            const loader = document.getElementById('global-loader');
+            const loaderVideo = document.getElementById('loader-video');
+            const reveals = document.querySelectorAll('.reveal');
+
+            function hideLoader() {
+                if (loader && loader.style.display !== 'none') {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                    reveals.forEach(el => el.classList.add('active'));
+                }
+            }
+
+            if (loaderVideo) {
+                // Wait for the video to finish playing before hiding the loader
+                loaderVideo.addEventListener('ended', hideLoader);
                 
-                const reveals = document.querySelectorAll('.reveal');
-                reveals.forEach(el => el.classList.add('active'));
-            }, 800);
+                // Fallbacks in case the video fails to load or browser blocks autoplay
+                loaderVideo.addEventListener('error', hideLoader);
+                setTimeout(hideLoader, 12000); // 12-second max timeout fallback
+            } else {
+                setTimeout(hideLoader, 800);
+            }
         });
 
         // --- UTILS ---
@@ -1111,7 +1140,7 @@
             const progress = ((state.formStep - 1) / (state.totalSteps - 1)) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
 
-            const titles = ['Personal Details', 'Professional Info', 'Food Preference', 'Upload Documents', 'Payment & Submit'];
+            const titles = ['Registration Category', 'Primary Registrant', 'Professional Details', 'Documents & Team', 'Payment Summary'];
             document.getElementById('step-title').innerText = titles[state.formStep - 1];
 
             for(let i=1; i<=state.totalSteps; i++) {
@@ -1145,13 +1174,13 @@
             const inputs = currentDiv.querySelectorAll('input[required], select[required]');
             let isValid = true;
             
+            // Special validation for radio buttons (Food Preference)
             if (state.formStep === 3) {
                 const radios = document.querySelectorAll('input[name="food"]:checked');
                 if (radios.length === 0) {
                     showToast("Please select a food preference.", "error");
                     return false;
                 }
-                return true;
             }
 
             inputs.forEach(input => {
@@ -1173,7 +1202,6 @@
             if (validateStep() && state.formStep < state.totalSteps) {
                 state.formStep++;
                 updateStepUI();
-                if(state.formStep === 5) calculateFee();
             }
         }
 
@@ -1200,7 +1228,7 @@
 
         function createMemberFormHTML(index) {
             return `
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-gray-200 dark:border-slate-700 mb-4 shadow-sm">
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm team-member-card">
                 <h5 class="font-bold text-primary dark:text-blue-400 mb-4 border-b border-gray-100 dark:border-slate-700 pb-2">Team Member ${index}</h5>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="md:col-span-2">
@@ -1270,7 +1298,6 @@
             container.innerHTML = '';
 
             let memberCount = 0;
-            // Subtract 1 because the primary registrant is handled in step 1 & 2
             if (cat === 'Team of 25') memberCount = 24;
             if (cat === 'Team of 50') memberCount = 49;
 
@@ -1278,12 +1305,11 @@
                 let html = `
                     <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-4">
                         <h4 class="font-heading font-bold text-primary dark:text-blue-300 mb-1">Additional Team Members (${memberCount})</h4>
-                        <p class="text-xs text-gray-600 dark:text-gray-400">Please provide details for the remaining ${memberCount} members of your group below.</p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Please provide the individual details for the remaining ${memberCount} participants.</p>
                     </div>
                 `;
                 for (let i = 1; i <= memberCount; i++) {
-                    // +1 because index 1 is technically the primary registrant filling out Step 1
-                    html += createMemberFormHTML(i + 1);
+                    html += createMemberFormHTML(i + 1); 
                 }
                 container.innerHTML = html;
                 container.classList.remove('hidden');
@@ -1297,18 +1323,49 @@
         function calculateFee() {
             const cat = document.getElementById('reg-category').value;
             
-            if(!cat) {
-                document.getElementById('summary-base').innerText = '₹0';
-                document.getElementById('summary-total').innerText = '₹0';
-                return;
+            const now = new Date();
+            const onSpotDate = new Date("2026-08-21T00:00:00"); 
+            const isOnSpot = now >= onSpotDate; 
+            
+            let totalFee = 0;
+            let calculationText = "-";
+            let phaseText = isOnSpot ? "On-Spot Phase" : "Regular Phase";
+            
+            let rate = 0;
+            let count = 1;
+            
+            if (cat === 'Solo - Student' || cat === 'Solo - Professional') {
+                rate = isOnSpot ? 3500 : 2500;
+                count = 1;
+                totalFee = count * rate;
+                calculationText = `1 Participant × ₹${rate.toLocaleString()}`;
+            } else if (cat === 'Team of 25') {
+                rate = isOnSpot ? 3500 : 2250;
+                count = 25;
+                totalFee = count * rate;
+                calculationText = `25 Participants × ₹${rate.toLocaleString()}`;
+            } else if (cat === 'Team of 50') {
+                rate = isOnSpot ? 3500 : 2000;
+                count = 50;
+                totalFee = count * rate;
+                calculationText = `50 Participants × ₹${rate.toLocaleString()}`;
             }
 
-            const phase = 'Regular Phase'; 
-            document.getElementById('summary-phase').innerText = phase;
-            const fee = pricing[cat];
+            document.getElementById('summary-category').innerText = cat || '-';
+            document.getElementById('summary-calculation').innerText = calculationText;
             
-            document.getElementById('summary-base').innerText = `₹${fee.toLocaleString()}`;
-            document.getElementById('summary-total').innerText = `₹${fee.toLocaleString()}`;
+            const phaseSpan = document.getElementById('summary-phase');
+            phaseSpan.innerText = phaseText;
+            
+            if(isOnSpot) {
+                phaseSpan.classList.remove('text-green-600');
+                phaseSpan.classList.add('text-red-600');
+            } else {
+                phaseSpan.classList.remove('text-red-600');
+                phaseSpan.classList.add('text-green-600');
+            }
+            
+            document.getElementById('summary-total').innerText = `₹${totalFee.toLocaleString()}`;
         }
 
         const fileToBase64 = file => new Promise((resolve, reject) => {
@@ -1340,7 +1397,6 @@
                 const cat = document.getElementById('reg-category').value;
                 let teamMembers = [];
                 
-                // Collect dynamic team members if group is selected
                 if (cat === 'Team of 25' || cat === 'Team of 50') {
                     const count = cat === 'Team of 25' ? 24 : 49;
                     for (let i = 1; i <= count; i++) {
@@ -1354,9 +1410,7 @@
                             designation: document.getElementById(`member-${i+1}-designation`).value,
                             institution: document.getElementById(`member-${i+1}-institution`).value,
                             food: document.getElementById(`member-${i+1}-food`).value,
-                            idCardFilename: fileInput.files[0]?.name || 'not-provided.pdf'
-                            // Note: Processing all 50 actual files into Base64 simultaneously here might 
-                            // lock the browser on slow connections, keeping it to filenames for mock demonstration
+                            idCardFilename: fileInput?.files[0]?.name || 'not-provided.pdf'
                         });
                     }
                 }
@@ -1401,7 +1455,7 @@
                 localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
                 
                 document.getElementById('registration-form').reset();
-                document.getElementById('team-members-container').innerHTML = ''; // reset members
+                document.getElementById('team-members-container').innerHTML = '';
                 state.formStep = 1;
                 updateStepUI();
                 
@@ -1531,8 +1585,8 @@
 
         function seedMockData() {
             const mocks = [
-                { id: generateID(), timestamp: new Date(Date.now() - 86400000).toISOString(), status: 'Pending', name: 'Dr. John Doe', email: 'john@example.com', phone: '9876543210', institution: 'Malla Reddy Univ', category: 'Solo - Professional', amount: '₹2500', food: 'Veg', entryDone: false, foodDone: false },
-                { id: generateID(), timestamp: new Date(Date.now() - 186400000).toISOString(), status: 'Approved', name: 'Jane Smith', email: 'jane@example.com', phone: '9123456780', institution: 'Osmania Univ', category: 'Solo - Student', amount: '₹1500', food: 'Non Veg', entryDone: false, foodDone: false }
+                { id: generateID(), timestamp: new Date(Date.now() - 86400000).toISOString(), status: 'Pending', name: 'Dr. John Doe', email: 'john@example.com', phone: '9876543210', institution: 'Malla Reddy Univ', category: 'Solo - Professional', amount: '₹2,500', food: 'Veg', entryDone: false, foodDone: false },
+                { id: generateID(), timestamp: new Date(Date.now() - 186400000).toISOString(), status: 'Approved', name: 'Jane Smith', email: 'jane@example.com', phone: '9123456780', institution: 'Osmania Univ', category: 'Solo - Student', amount: '₹2,500', food: 'Non Veg', entryDone: false, foodDone: false }
             ];
             state.registrations = [...mocks, ...state.registrations];
             localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
@@ -1543,6 +1597,118 @@
         function showEmailTemplates() {
             document.getElementById('email-modal').classList.remove('hidden');
             document.getElementById('email-modal').classList.add('flex');
+        }
+
+        async function testMakeWebhook() {
+            if (!WEBHOOK_URL.includes('make.com')) {
+                showToast("Please set a valid Make.com webhook URL first.", "error");
+                return;
+            }
+            
+            showToast("Sending test data to Make.com...", "info");
+            
+            const dummyImageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="; 
+            
+            const basePayload = {
+                timestamp: new Date().toISOString(),
+                status: 'Pending',
+                age: "28",
+                gender: "Male",
+                phone: "9876543210",
+                affiliation: "Dept of Physiotherapy",
+                idProofMock: "test_id.png",
+                paymentMock: "test_payment.png",
+                entryDone: false,
+                foodDone: false,
+                idCard: { filename: "test_id.png", mimeType: "image/png", data: dummyImageBase64 },
+                paymentScreenshot: { filename: "test_payment.png", mimeType: "image/png", data: dummyImageBase64 }
+            };
+
+            const payloads = [
+                {
+                    ...basePayload,
+                    id: "MAL-TEST-1",
+                    name: "Alice (Solo Student)",
+                    email: "alice@student.edu",
+                    designation: "PG Student",
+                    institution: "Malla Reddy University",
+                    food: "Veg",
+                    category: "Solo - Student",
+                    amount: "₹2,500",
+                    teamMembers: []
+                },
+                {
+                    ...basePayload,
+                    id: "MAL-TEST-2",
+                    name: "Dr. Bob (Solo Pro)",
+                    email: "bob@clinic.com",
+                    designation: "Professional",
+                    institution: "City Hospital",
+                    food: "Non Veg",
+                    category: "Solo - Professional",
+                    amount: "₹2,500",
+                    teamMembers: []
+                },
+                {
+                    ...basePayload,
+                    id: "MAL-TEST-3",
+                    name: "Charlie (Team 25 Lead)",
+                    email: "charlie@team25.com",
+                    designation: "Faculty",
+                    institution: "Osmania University",
+                    food: "Veg",
+                    category: "Team of 25",
+                    amount: "₹56,250",
+                    teamMembers: Array.from({length: 24}, (_, i) => ({
+                        name: `Team Member ${i+2}`,
+                        email: `member${i+2}@team25.com`,
+                        phone: "9876543210",
+                        age: "22",
+                        gender: "Female",
+                        designation: "UG Student",
+                        institution: "Osmania University",
+                        food: i % 2 === 0 ? "Veg" : "Non Veg",
+                        idCardFilename: "member_id.png"
+                    }))
+                },
+                {
+                    ...basePayload,
+                    id: "MAL-TEST-4",
+                    name: "Diana (Team 50 Lead)",
+                    email: "diana@team50.com",
+                    designation: "Academician",
+                    institution: "NIMS",
+                    food: "Non Veg",
+                    category: "Team of 50",
+                    amount: "₹100,000",
+                    teamMembers: Array.from({length: 49}, (_, i) => ({
+                        name: `Team Member ${i+2}`,
+                        email: `member${i+2}@team50.com`,
+                        phone: "9876543210",
+                        age: "24",
+                        gender: "Male",
+                        designation: "PG Student",
+                        institution: "NIMS",
+                        food: i % 2 === 0 ? "Veg" : "Non Veg",
+                        idCardFilename: "member_id.png"
+                    }))
+                }
+            ];
+
+            try {
+                for (const p of payloads) {
+                    await fetch(WEBHOOK_URL, { 
+                        method: 'POST', 
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(p) 
+                    });
+                    await new Promise(r => setTimeout(r, 700)); 
+                }
+                showToast("Test payloads sent! Check Make.com Scenario.", "success");
+            } catch (e) {
+                console.error(e);
+                showToast("Error sending webhook. Check console.", "error");
+            }
         }
 
         // --- CHECK-IN LOGIC ---
