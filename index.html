@@ -517,10 +517,10 @@
                             <div class="form-step hidden" id="step-4">
                                 <div class="mb-8 bg-gray-50 dark:bg-slate-800/50 p-6 rounded-xl border border-gray-200 dark:border-slate-700">
                                     <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Upload ID Card (Primary Registrant) *</label>
-                                    <p class="text-xs text-gray-500 mb-4">College ID, Employee ID, or Aadhar. Max 10MB.</p>
+                                    <p class="text-xs text-gray-500 mb-4">College ID, Employee ID. Max 10MB (Images only).</p>
                                     
                                     <div class="border-2 border-dashed border-gray-300 dark:border-slate-500 rounded-xl p-6 text-center bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors cursor-pointer" onclick="document.getElementById('reg-id-upload').click()">
-                                        <input type="file" id="reg-id-upload" accept=".jpg,.jpeg,.png,.pdf" required class="hidden" onchange="handleFileUpload(this, 'id-preview')">
+                                        <input type="file" id="reg-id-upload" accept="image/*, .jpg, .jpeg, .png" required class="hidden" onchange="handleFileUpload(this, 'id-preview')">
                                         <i class="fas fa-id-card text-3xl text-gray-400 mb-2"></i>
                                         <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Click to upload ID Card</p>
                                         <p id="id-preview" class="text-xs text-primary dark:text-blue-400 font-semibold mt-2 hidden"></p>
@@ -552,15 +552,18 @@
                                             <div class="bg-white dark:bg-slate-800 p-2 rounded-lg w-full max-w-sm mx-auto border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
                                                 <img src="payment_scanner.png" alt="ICICI UPI QR Code" class="w-full h-auto object-contain" onerror="this.src='https://placehold.co/400x300/0B3C6D/FFFFFF?text=QR+Code+Unavailable'">
                                             </div>
+                                            <p class="text-xs text-slate-500 dark:text-gray-400 mt-3 text-center max-w-sm mx-auto font-medium">
+                                                <i class="fas fa-wifi text-accent mr-1"></i> Please ensure proper internet connectivity to prevent any interruption during the registration and document upload process.
+                                            </p>
                                         </div>
 
                                         <!-- Payment Proof -->
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Upload Payment Screenshot *</label>
                                             <div class="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-4 text-center bg-gray-50 dark:bg-slate-800/50 cursor-pointer" onclick="document.getElementById('reg-payment-upload').click()">
-                                                <input type="file" id="reg-payment-upload" accept=".jpg,.jpeg,.png,.pdf" required class="hidden" onchange="handleFileUpload(this, 'payment-preview')">
+                                                <input type="file" id="reg-payment-upload" accept="image/*, .jpg, .jpeg, .png" required class="hidden" onchange="handleFileUpload(this, 'payment-preview')">
                                                 <i class="fas fa-receipt text-2xl text-gray-400 mb-2"></i>
-                                                <p class="text-xs font-medium text-gray-700 dark:text-gray-300">Upload Screenshot (Max 10MB)</p>
+                                                <p class="text-xs font-medium text-gray-700 dark:text-gray-300">Upload Screenshot (Max 10MB, Images only)</p>
                                                 <p id="payment-preview" class="text-xs text-green-600 font-semibold mt-1 hidden"></p>
                                             </div>
                                         </div>
@@ -610,6 +613,24 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Processing Upload View -->
+        <section id="view-processing" class="app-view hidden">
+            <div class="max-w-2xl mx-auto px-6 pt-20 text-center">
+                <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary dark:border-blue-500 mb-6"></div>
+                <h2 class="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-2">Securing Your Registration</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-8 max-w-md mx-auto">
+                    We are processing your files and syncing your details with the database. Please do not close or reload this tab.
+                </p>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 mb-8 max-w-md mx-auto">
+                    <div class="text-[10px] uppercase tracking-wider text-gray-400 font-bold mb-2">Estimated Remaining Time</div>
+                    <div id="processing-timer" class="font-heading text-4xl font-extrabold text-accent">00:00</div>
+                    <div class="w-full bg-gray-200 dark:bg-slate-700 h-2 rounded-full mt-4 overflow-hidden">
+                        <div id="processing-progress-bar" class="bg-primary dark:bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
@@ -962,6 +983,13 @@
             return 'MAL' + Math.floor(10000 + Math.random() * 90000);
         }
 
+        // Accidental tab closure prevention routine
+        function preventTabClose(e) {
+            e.preventDefault();
+            e.returnValue = 'Your registration and document uploads are currently in progress. Closing this tab will abort your registration. Are you sure you want to leave?';
+            return e.returnValue;
+        }
+
         function navigateTo(viewId) {
             
             // Check Admin Security
@@ -972,6 +1000,13 @@
                 document.getElementById('admin-login-overlay').style.display = 'none';
             }
 
+            // Accidental tab closure prevention dynamic binder
+            if (viewId === 'processing') {
+                window.addEventListener('beforeunload', preventTabClose);
+            } else {
+                window.removeEventListener('beforeunload', preventTabClose);
+            }
+
             document.querySelectorAll('.app-view').forEach(v => {
                 v.classList.remove('active');
                 setTimeout(() => { if(!v.classList.contains('active')) v.style.display = 'none'; }, 400);
@@ -980,7 +1015,7 @@
             const nav = document.getElementById('main-nav');
             const foot = document.getElementById('main-footer');
             
-            if(viewId === 'admin' || viewId === 'checkin') {
+            if(viewId === 'admin' || viewId === 'checkin' || viewId === 'processing') {
                 nav.style.display = 'none';
                 foot.style.display = 'none';
             } else {
@@ -1131,17 +1166,33 @@
             }
         }
 
+        // Optimized upload validation routine strictly allowing only image file types
         function handleFileUpload(input, previewId) {
             const file = input.files[0];
             if (file) {
-                if (file.size > 10 * 1024 * 1024) {
-                    showToast("File is too large. Max 10MB.", "error");
+                // Validate if file MIME type starts with image/
+                if (!file.type.startsWith('image/')) {
+                    showToast("Only image files (JPG, JPEG, PNG) are accepted. PDFs are not allowed.", "error");
                     input.value = '';
+                    const preview = document.getElementById(previewId);
+                    if (preview) preview.classList.add('hidden');
                     return;
                 }
+
+                // Standard 10MB limit check
+                if (file.size > 10 * 1024 * 1024) {
+                    showToast("File is too large. Max size allowed is 10MB.", "error");
+                    input.value = '';
+                    const preview = document.getElementById(previewId);
+                    if (preview) preview.classList.add('hidden');
+                    return;
+                }
+
                 const preview = document.getElementById(previewId);
-                preview.textContent = `Selected: ${file.name} (${(file.size/1024/1024).toFixed(1)}MB)`;
-                preview.classList.remove('hidden');
+                if (preview) {
+                    preview.textContent = `Selected: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB)`;
+                    preview.classList.remove('hidden');
+                }
             }
         }
 
@@ -1204,8 +1255,9 @@
                         </select>
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Upload ID Card * (Max 10MB)</label>
-                        <input type="file" id="member-${index}-id" accept=".jpg,.jpeg,.png,.pdf" required class="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                        <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Upload ID Card * (Max 10MB, Images only)</label>
+                        <input type="file" id="member-${index}-id" accept="image/*, .jpg, .jpeg, .png" required class="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer" onchange="handleFileUpload(this, 'member-${index}-preview')">
+                        <p id="member-${index}-preview" class="text-xs text-primary dark:text-blue-400 font-semibold mt-1 hidden"></p>
                     </div>
                 </div>
             </div>`;
@@ -1288,22 +1340,10 @@
         }
 
         // --- COMPRESSION AND FILE PIPELINE ENGINE ---
+        // Pipeline strictly optimized for images, with PDFs disabled
         const compressAndConvertFile = file => new Promise((resolve, reject) => {
             if(!file) return resolve(null);
             
-            // Bypass canvas compression pipeline if item is PDF
-            if (!file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve({
-                    filename: file.name,
-                    dataUri: reader.result 
-                });
-                reader.onerror = error => reject(error);
-                return;
-            }
-
-            // Image Compression routine
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function(e) {
@@ -1422,6 +1462,39 @@
             }
         }
 
+        // Processing Timer Countdown Routine
+        function startProcessingTimer(duration) {
+            navigateTo('processing');
+            
+            let timeRemaining = duration;
+            const timerDisplay = document.getElementById('processing-timer');
+            const progressBar = document.getElementById('processing-progress-bar');
+            
+            function updateDisplay() {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                if (timerDisplay) {
+                    timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+                if (progressBar) {
+                    const percent = ((duration - timeRemaining) / duration) * 100;
+                    progressBar.style.width = `${percent}%`;
+                }
+            }
+            
+            updateDisplay();
+            
+            const interval = setInterval(() => {
+                timeRemaining--;
+                if (timeRemaining <= 0) {
+                    clearInterval(interval);
+                    navigateTo('success');
+                } else {
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+
         // Sequential Submission with Direct Drive Mapping & Resiliency Fallback
         async function submitRegistration() {
             if (!validateStep()) return;
@@ -1476,9 +1549,14 @@
                     }
                 }
 
-                // 2. Direct user to success view immediately with no loading pauses
+                // Calculate dynamic delay based on selected category
+                let delaySeconds = 30; // 30 seconds default for Solo Student/Professional
+                if (cat === 'Team of 25') delaySeconds = 180; // 3 minutes
+                if (cat === 'Team of 50') delaySeconds = 300; // 5 minutes
+
+                // 2. Direct user to processing view with countdown timer
                 document.getElementById('success-payment-id').innerText = uniquePaymentID;
-                navigateTo('success');
+                startProcessingTimer(delaySeconds);
 
                 // 3. Clear form visual elements in background immediately
                 document.getElementById('registration-form').reset();
@@ -1730,6 +1808,27 @@
             document.getElementById('reject-modal').classList.remove('flex');
         }
 
+        // Diagnostician link directly to Google Web App
+        async function testAppsScriptConnection() {
+            showToast("Testing Google Connection...", "info");
+            try {
+                const response = await fetch(GOOGLE_DRIVE_UPLOAD_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ testMode: true })
+                });
+                const result = await response.json();
+                if (result && result.status === "success") {
+                    showToast("Google Apps Script Connection Active!", "success");
+                } else {
+                    showToast("Encountered unexpected response schema.", "error");
+                }
+            } catch (err) {
+                console.error(err);
+                showToast("Connection failed. Check Web App URL deployment.", "error");
+            }
+        }
+
         function confirmReject() {
             const id = document.getElementById('reject-id').value;
             const reason = document.getElementById('reject-reason').value;
@@ -1754,27 +1853,6 @@
             state.registrations = [...mocks, ...state.registrations];
             localStorage.setItem('festora_regs', JSON.stringify(state.registrations));
             if(state.currentView === 'admin' && state.adminAuthenticated) refreshAdminDashboard();
-        }
-
-        // Live connection diagnostician directly to Google Web App
-        async function testAppsScriptConnection() {
-            showToast("Testing Google Connection...", "info");
-            try {
-                const response = await fetch(GOOGLE_DRIVE_UPLOAD_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({ testMode: true })
-                });
-                const result = await response.json();
-                if (result && result.status === "success") {
-                    showToast("Google Apps Script Connection Active!", "success");
-                } else {
-                    showToast("Encountered unexpected response schema.", "error");
-                }
-            } catch (err) {
-                console.error(err);
-                showToast("Connection failed. Check Web App URL deployment.", "error");
-            }
         }
 
         // --- CHECK-IN KIOSK SIMULATION ENGINE ---
