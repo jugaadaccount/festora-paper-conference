@@ -1072,7 +1072,7 @@
 
         // --- LANDING PAGE LOGIC ---
         function initCountdown() {
-            const countDownDate = new Date("Aug 12, 2026 08:00:00").getTime(); // target date updated to 12 August 2026 [1.1.2]
+            const countDownDate = new Date("Aug 12, 2026 08:00:00").getTime(); // target date updated to 12 August 2026
             const x = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = countDownDate - now;
@@ -1379,16 +1379,18 @@
             reader.onerror = error => reject(error);
         });
 
-        // Fire-and-forget submission directly to Google Web App [1.1.1]
+        // Fire-and-forget submission directly to Google Web App
         function submitPayloadToGoogleWebApp(payload) {
             if (!GOOGLE_DRIVE_UPLOAD_URL || GOOGLE_DRIVE_UPLOAD_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL_HERE')) {
                 console.error("Google Apps Script Web App URL endpoint is not configured.");
                 return; 
             }
-            // Dispatches the POST asynchronously and ignores any CORS response parsing issues [1.1.1]
+            
+            // mode: 'no-cors' is configured to prevent CORS redirect blocks in production
             fetch(GOOGLE_DRIVE_UPLOAD_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'text/plain' },
+                mode: 'no-cors', 
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(payload)
             }).catch(err => console.warn("Direct upload processed in background.", err));
         }
@@ -1808,21 +1810,18 @@
             document.getElementById('reject-modal').classList.remove('flex');
         }
 
-        // Diagnostician link directly to Google Web App
+        // Live connection diagnostician directly to Google Web App
         async function testAppsScriptConnection() {
             showToast("Testing Google Connection...", "info");
             try {
-                const response = await fetch(GOOGLE_DRIVE_UPLOAD_URL, {
+                // mode: 'no-cors' is applied to prevent CORS errors during diagnostics on production domains
+                await fetch(GOOGLE_DRIVE_UPLOAD_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' },
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ testMode: true })
                 });
-                const result = await response.json();
-                if (result && result.status === "success") {
-                    showToast("Google Apps Script Connection Active!", "success");
-                } else {
-                    showToast("Encountered unexpected response schema.", "error");
-                }
+                showToast("Test payload dispatched! Check Sheets/Drive for success.", "success");
             } catch (err) {
                 console.error(err);
                 showToast("Connection failed. Check Web App URL deployment.", "error");
