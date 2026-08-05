@@ -1379,26 +1379,25 @@
             reader.onerror = error => reject(error);
         });
 
-        // Fire-and-forget submission directly to Google Web App
+        // Submission helper posting data directly to Google Web App, returning a Promise
         function submitPayloadToGoogleWebApp(payload) {
             if (!GOOGLE_DRIVE_UPLOAD_URL || GOOGLE_DRIVE_UPLOAD_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL_HERE')) {
                 console.error("Google Apps Script Web App URL endpoint is not configured.");
-                return; 
+                return Promise.resolve(); 
             }
             
-            // mode: 'no-cors' is configured to prevent CORS redirect blocks in production
-            fetch(GOOGLE_DRIVE_UPLOAD_URL, {
+            return fetch(GOOGLE_DRIVE_UPLOAD_URL, {
                 method: 'POST',
                 mode: 'no-cors', 
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(payload)
-            }).catch(err => console.warn("Direct upload processed in background.", err));
+            }).catch(err => console.warn("Upload returned background redirect/warning.", err));
         }
 
-        // Asynchronous non-blocking background queue handler
+        // Asynchronous non-blocking background queue handler (Unified Batch Payload Architecture)
         async function runBackgroundUpload(primaryData, teamMembersData) {
             try {
-                console.log("Background processor has safely started...");
+                console.log("Background processor starting unified batch optimization...");
                 
                 // Process and optimize primary files
                 const paymentScreenshotFile = primaryData.rawPayFile ? await compressAndConvertFile(primaryData.rawPayFile) : null;
@@ -1406,11 +1405,7 @@
 
                 const primaryPayload = {
                     id: primaryData.id,
-                    groupId: primaryData.groupId,
-                    paymentUniqueId: primaryData.paymentUniqueId,
                     role: "Primary",
-                    timestamp: primaryData.timestamp,
-                    status: 'Pending',
                     name: primaryData.name,
                     age: primaryData.age,
                     gender: primaryData.gender,
@@ -1420,27 +1415,20 @@
                     institution: primaryData.institution,
                     affiliation: primaryData.affiliation,
                     food: primaryData.food,
-                    category: primaryData.category,
-                    amount: primaryData.amount,
                     idCard: idCardFile,
                     paymentScreenshot: paymentScreenshotFile
                 };
 
-                // Asynchronously transfer primary details
-                submitPayloadToGoogleWebApp(primaryPayload);
-
-                // Sequentially optimize and transfer team members in background
+                const processedMembers = [];
+                // Sequentially optimize and append team members to array
                 for (let i = 0; i < teamMembersData.length; i++) {
                     const member = teamMembersData[i];
                     const compressedMemberId = member.rawIdFile ? await compressAndConvertFile(member.rawIdFile) : null;
 
-                    const teamMemberPayload = {
+                    processedMembers.push({
                         id: primaryData.id + `-${member.index}`,
-                        groupId: primaryData.groupId,
-                        paymentUniqueId: primaryData.paymentUniqueId,
                         role: "Team Member",
-                        timestamp: primaryData.timestamp,
-                        status: 'Pending',
+                        index: member.index,
                         name: member.name,
                         age: member.age,
                         gender: member.gender,
@@ -1448,19 +1436,29 @@
                         email: member.email,
                         designation: member.designation,
                         institution: member.institution,
-                        affiliation: primaryData.affiliation,
                         food: member.food,
-                        category: primaryData.category,
-                        amount: '-',
-                        idCard: compressedMemberId,
-                        paymentScreenshot: null
-                    };
-
-                    submitPayloadToGoogleWebApp(teamMemberPayload);
+                        idCard: compressedMemberId
+                    });
                 }
-                console.log("Background processing queue execution complete.");
+
+                // Compile into a single unified schema batch request payload
+                const batchPayload = {
+                    isBatch: true,
+                    groupId: primaryData.groupId,
+                    paymentUniqueId: primaryData.paymentUniqueId,
+                    timestamp: primaryData.timestamp,
+                    status: 'Pending',
+                    category: primaryData.category,
+                    amount: primaryData.amount,
+                    primary: primaryPayload,
+                    members: processedMembers
+                };
+
+                // Single call execution avoids sequential network delays & database lock issues
+                await submitPayloadToGoogleWebApp(batchPayload);
+                console.log("Unified batch upload complete.");
             } catch (err) {
-                console.error("Asynchronous background error: ", err);
+                console.error("Asynchronous batch processing error: ", err);
             }
         }
 
